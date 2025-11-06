@@ -9,8 +9,8 @@ const Button = ({ onPress, children, style, mode }: ButtonType) => {
       onPress={onPress}
       style={({ pressed }) => [pressed && styles.pressed]}
     >
-      <View style={[styles.innerContainer, styles[`${mode}`], style]}>
-        <Text style={[styles.buttonText, styles[`${mode}Text`]]}>
+      <View style={[styles.innerContainer, mode && styles[`${mode}`], style]}>
+        <Text style={[styles.buttonText, mode && styles[`${mode}Text`]]}>
           {children}
         </Text>
       </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     color: appColors.white,
     textAlign: 'center',
     fontWeight: 500,
-    fontSize: 16,
+    fontSize: 18,
   },
 
   flatText: {

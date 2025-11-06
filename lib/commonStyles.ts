@@ -25,4 +25,28 @@ export const globalStyles = StyleSheet.create({
   rootContainer: {
     padding: 16,
   },
+
+  title: {
+    fontSize: 32.91,
+    color: appColors.black,
+    fontWeight: 500,
+    paddingBottom: 10,
+    marginTop: 45,
+  },
+
+  description: {
+    color: '#A8A8A8',
+    fontSize: 17,
+    marginBottom: 30,
+    lineHeight: 22,
+  },
+
+  pageTitle: {
+    fontSize: 27,
+    color: '#000000C9',
+    fontWeight: 600,
+    borderBottomWidth: 1,
+    borderColor: '#CECECE70',
+    paddingBottom: 10,
+  },
 });

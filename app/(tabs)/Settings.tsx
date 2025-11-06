@@ -1,12 +1,17 @@
+import { globalStyles } from '@/lib/commonStyles';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const SettingsScreen = () => {
   return (
-    <View>
-      <Text>Settings</Text>
+    <View style={globalStyles.rootContainer}>
+      <Text style={globalStyles.pageTitle}>Settings</Text>
     </View>
   );
 };
 
 export default SettingsScreen;
+
+const styles = StyleSheet.create({
+  root: {},
+});

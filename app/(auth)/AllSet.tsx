@@ -1,11 +1,15 @@
 import Button from '@/components/UI/Button';
 import { appColors, globalStyles } from '@/lib/commonStyles';
 import { FontAwesome6 } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AllSetScreen = () => {
+  const router = useRouter();
+
+  const handleNavigate = () => router.push('/(auth)/Verify');
   return (
     <>
       <SafeAreaView
@@ -25,7 +29,7 @@ const AllSetScreen = () => {
             </Text>
           </View>
 
-          <Button mode='white' style={styles.button}>
+          <Button mode='white' style={styles.button} onPress={handleNavigate}>
             Proceed to dashboard
           </Button>
         </View>

@@ -1,11 +1,12 @@
-import { globalStyles } from '@/lib/commonStyles';
+import { Link } from 'expo-router';
 import React from 'react';
 import { Text, View } from 'react-native';
 
 const TransactionsScreen = () => {
   return (
-    <View style={[globalStyles.rootContainer]}>
-      <Text style={globalStyles.pageTitle}>Transactions</Text>
+    <View>
+      <Text>Transaction</Text>
+      <Link href='/(tabs)/home/NewEscrow'>New Escrow</Link>
     </View>
   );
 };

@@ -13,11 +13,15 @@ const AuthLayout = () => {
         },
       }}
     >
+      <Stack.Screen name='Login' />
+      <Stack.Screen name='SignUp' />
+      <Stack.Screen name='Verify' />
+      <Stack.Screen name='Onboarding' />
       <Stack.Screen
         name='AllSet'
         options={{
           contentStyle: {
-            // backgroundColor: appColors.primary500,
+            padding: 0,
           },
         }}
       />

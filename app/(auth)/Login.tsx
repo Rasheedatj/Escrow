@@ -1,12 +1,18 @@
+import Face from '@/assets/images/Face';
 import Logo from '@/assets/images/Logo';
 import Button from '@/components/UI/Button';
+import Radio from '@/components/UI/Radio';
 import { appColors } from '@/lib/commonStyles';
 import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
-import React from 'react';
+import { Link, useRouter } from 'expo-router';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const LoginScreen = () => {
+  const router = useRouter();
+  const [remember, setRemember] = useState(false);
+
+  const handleLogin = () => router.push('/(tabs)/home');
   return (
     <View style={styles.root}>
       <Logo />
@@ -29,23 +35,38 @@ const LoginScreen = () => {
           <TextInput style={styles.input} placeholder='Email address' />
         </Pressable>
 
-        <Pressable
-          style={({ pressed }) => [styles.formItem, pressed && styles.pressed]}
-        >
-          <Feather name='lock' size={24} color={appColors.border} />
-          <TextInput
-            style={styles.input}
-            placeholder='Password'
-            secureTextEntry
-          />
-          <AntDesign name='eye-invisible' size={24} color={appColors.border} />
-        </Pressable>
+        <View style={styles.password}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.formItem,
+              { flex: 1 },
+              pressed && styles.pressed,
+            ]}
+          >
+            <Feather name='lock' size={24} color={appColors.border} />
+            <TextInput
+              style={styles.input}
+              placeholder='Password'
+              secureTextEntry
+            />
+            <AntDesign
+              name='eye-invisible'
+              size={24}
+              color={appColors.border}
+            />
+          </Pressable>
+
+          <View style={styles.face}>
+            <Face color='#2C2828' />
+          </View>
+        </View>
 
         <View style={styles.footer}>
-          <Text style={styles.remember}>Remember me</Text>
+          <Radio label='Remember me' value={remember} setValue={setRemember} />
+
           <Text style={styles.forgot}>Forgot password?</Text>
         </View>
-        <Button>Log In</Button>
+        <Button onPress={handleLogin}>Log In</Button>
       </View>
     </View>
   );
@@ -95,6 +116,7 @@ const styles = StyleSheet.create({
     textDecorationColor: appColors.primary500,
     textDecorationStyle: 'solid',
     fontSize: 17,
+    textDecorationLine: 'underline',
   },
 
   formItem: {
@@ -117,5 +139,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     height: 40,
     flex: 1,
+  },
+
+  password: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  face: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#CFCFCF33',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 25,
+    marginLeft: 10,
   },
 });
