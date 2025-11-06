@@ -14,6 +14,7 @@ const HomeLayout = () => {
       <Stack.Screen
         name='index'
         options={{
+          title: 'home',
           headerShown: false,
         }}
       />
