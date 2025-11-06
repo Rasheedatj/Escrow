@@ -1,35 +1,60 @@
+import EscrowIcon from '@/assets/images/Escrow';
+import SettingsIcon from '@/assets/images/Settings';
+import SwapIocn from '@/assets/images/Swap';
+import { appColors } from '@/lib/commonStyles';
+import { Feather } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabLayout = () => {
   return (
+    // <SafeAreaView style={{ flex: 1 }} edges={['top']}>
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarInactiveTintColor: appColors.grayText500,
+        tabBarActiveTintColor: appColors.primary600,
+        tabBarStyle: {
+          paddingTop: 10,
+        },
+        sceneStyle: {
+          backgroundColor: 'white',
+        },
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <Feather name='home' size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name='Escrow'
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Escrow',
+          tabBarIcon: ({ color, size }) => <EscrowIcon color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name='Transactions'
+        options={{
+          title: 'Transactions',
+          tabBarIcon: ({ color, size }) => <SwapIocn color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name='Settings'
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color, size }) => <SettingsIcon color={color} />,
         }}
       />
     </Tabs>
+    // </SafeAreaView>
   );
-}
+};
+
+export default TabLayout;
