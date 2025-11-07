@@ -1,5 +1,6 @@
 import User from '@/assets/images/User';
 import SettingItem from '@/components/SettingItem';
+import PageTitle from '@/components/UI/PageTitle';
 import { profile } from '@/data/UI';
 import { globalStyles } from '@/lib/commonStyles';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,7 +10,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 const SettingsScreen = () => {
   return (
     <View style={globalStyles.rootContainer}>
-      <Text style={globalStyles.pageTitle}>Settings</Text>
+      <PageTitle>Settings</PageTitle>
       <View style={styles.profile}>
         <User />
         <View style={styles.article}>

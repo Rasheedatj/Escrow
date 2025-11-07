@@ -76,3 +76,8 @@ export interface TabTransactionsProps {
   walletData: TransactionItem[];
   showBtn?: boolean;
 }
+
+export interface PageTitleProp {
+  children: ReactNode;
+  headerRight?: React.JSX.Element;
+}

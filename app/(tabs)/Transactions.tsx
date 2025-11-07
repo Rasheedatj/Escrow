@@ -1,13 +1,14 @@
 import TabTransactions from '@/components/transactions/TabTransactions';
+import PageTitle from '@/components/UI/PageTitle';
 import { escrowTransactionData, walletTransactionData } from '@/data/UI';
 import { globalStyles } from '@/lib/commonStyles';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 const TransactionsScreen = () => {
   return (
     <View style={[globalStyles.rootContainer]}>
-      <Text style={globalStyles.pageTitle}>Transactions</Text>
+      <PageTitle>Transactions</PageTitle>
       <TabTransactions
         escrowData={escrowTransactionData}
         walletData={walletTransactionData}

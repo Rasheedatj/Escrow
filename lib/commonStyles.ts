@@ -40,13 +40,4 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 30,
     lineHeight: 22,
   },
-
-  pageTitle: {
-    fontSize: 27,
-    color: '#000000C9',
-    fontWeight: 600,
-    borderBottomWidth: 1,
-    borderColor: '#CECECE70',
-    paddingBottom: 10,
-  },
 });
