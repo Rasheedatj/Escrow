@@ -1,12 +1,16 @@
-import { Link } from 'expo-router';
+import TabTransactions from '@/components/transactions/TabTransactions';
+import { escrowTransactionData, walletTransactionData } from '@/data/UI';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 const TransactionsScreen = () => {
   return (
-    <View>
-      <Text>Transaction</Text>
-      <Link href='/(tabs)/home/NewEscrow'>New Escrow</Link>
+    <View style={{ paddingHorizontal: 16 }}>
+      <TabTransactions
+        escrowData={escrowTransactionData}
+        walletData={walletTransactionData}
+        showBtn={true}
+      />
     </View>
   );
 };

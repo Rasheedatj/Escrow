@@ -2,14 +2,15 @@ import { appColors } from '@/lib/commonStyles';
 import { TransactionItem as TransactionItemProp } from '@/lib/types';
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 const TransactionItem = ({
   transaction,
 }: {
   transaction: TransactionItemProp;
 }) => {
-  const { amount, description, time, type, title } = transaction;
+  const { amount, description, time, type, title, userTag, userAvatar } =
+    transaction;
   function formatTime(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleTimeString([], {
@@ -20,21 +21,28 @@ const TransactionItem = ({
   }
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.icon,
-          type === 'withdraw' ? styles.withdraw : styles.deposit,
-        ]}
-      >
-        {type === 'withdraw' ? (
-          <Feather name='upload' size={24} color='white' />
-        ) : (
-          <Feather name='download' size={24} color='white' />
-        )}
-      </View>
+      {userTag ? (
+        <View style={[styles.icon]}>
+          <Image source={{ uri: userAvatar }} style={styles.icon} />
+          {/* <User /> */}
+        </View>
+      ) : (
+        <View
+          style={[
+            styles.icon,
+            type === 'withdraw' ? styles.withdraw : styles.deposit,
+          ]}
+        >
+          {type === 'withdraw' ? (
+            <Feather name='upload' size={24} color='white' />
+          ) : (
+            <Feather name='download' size={24} color='white' />
+          )}
+        </View>
+      )}
 
       <View style={styles.article}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{userTag ? userTag : title}</Text>
         <Text style={styles.description}>{description.slice(0, 30)}...</Text>
       </View>
 

@@ -10,6 +10,7 @@ import Support from '@/assets/images/Support';
 import {
   OnboardingItem,
   ProfileItem,
+  TabItem,
   TransactionItem,
   VerificationItem,
 } from '@/lib/types';
@@ -114,7 +115,8 @@ export const escrowTransactionData: TransactionItem[] = [
     type: 'deposit',
     amount: 25000,
     time: '2025-11-06T10:45:00Z',
-    title: 'Escrow Deposit - Project Alpha',
+    userTag: 'Tag32Gb6',
+    userAvatar: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe',
     description: 'Funds deposited for web development project milestone 1.',
   },
   {
@@ -122,7 +124,8 @@ export const escrowTransactionData: TransactionItem[] = [
     type: 'withdraw',
     amount: 10000,
     time: '2025-11-05T15:20:00Z',
-    title: 'Release to Vendor',
+    userTag: 'Tag32Gb6',
+    userAvatar: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe',
     description: 'Payment released to vendor for completed milestone.',
   },
   {
@@ -130,7 +133,8 @@ export const escrowTransactionData: TransactionItem[] = [
     type: 'deposit',
     amount: 5000,
     time: '2025-11-04T08:55:00Z',
-    title: 'Escrow Funding - Logo Design',
+    userTag: 'Tag32Gb6',
+    userAvatar: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe',
     description: 'Client funded escrow for logo design project.',
   },
   {
@@ -138,7 +142,8 @@ export const escrowTransactionData: TransactionItem[] = [
     type: 'withdraw',
     amount: 5000,
     time: '2025-11-03T11:10:00Z',
-    title: 'Refund to Buyer',
+    userTag: 'Tag32Gb6',
+    userAvatar: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe',
     description: 'Refund processed after project cancellation.',
   },
   {
@@ -146,7 +151,8 @@ export const escrowTransactionData: TransactionItem[] = [
     type: 'deposit',
     amount: 15000,
     time: '2025-11-02T16:30:00Z',
-    title: 'Escrow Top-up',
+    userTag: 'Tag32Gb6',
+    userAvatar: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe',
     description: 'Additional funds added to ongoing escrow agreement.',
   },
   {
@@ -154,7 +160,8 @@ export const escrowTransactionData: TransactionItem[] = [
     type: 'withdraw',
     amount: 7000,
     time: '2025-11-01T09:25:00Z',
-    title: 'Vendor Payout',
+    userTag: 'Tag32Gb6',
+    userAvatar: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe',
     description: 'Partial payout to vendor for phase completion.',
   },
 ];
@@ -184,5 +191,16 @@ export const profile: ProfileItem[] = [
     icon: <Logout />,
     title: 'Log Out',
     description: 'Log out of your account',
+  },
+];
+
+export const transactionsTabs: TabItem[] = [
+  {
+    id: 'escrow',
+    title: 'Escrow Transactions',
+  },
+  {
+    id: 'wallet',
+    title: 'Wallet Transactions',
   },
 ];

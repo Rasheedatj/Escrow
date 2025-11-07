@@ -26,7 +26,8 @@ export default Tab;
 const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 8,
   },
   item: {
     padding: 10,

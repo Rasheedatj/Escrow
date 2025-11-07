@@ -16,6 +16,8 @@ export interface VerificationItem {
 export interface ButtonType {
   onPress?: () => void;
   children: ReactNode;
+  icon?: ReactNode;
+  iconPosition?: 'left' | 'right';
   style?: any;
   mode?: 'transparent' | 'flat' | 'white';
 }
@@ -37,11 +39,13 @@ export interface RadioType {
 
 export interface TransactionItem {
   id: string;
-  type: 'withdraw' | 'deposit';
   amount: number;
   time: string;
-  title: string;
   description: string;
+  type?: 'withdraw' | 'deposit';
+  title?: string;
+  userTag?: string;
+  userAvatar?: string;
 }
 
 export interface TabProp {
@@ -59,4 +63,16 @@ export interface ProfileItem {
   icon: ReactNode;
   title: string;
   description: string;
+}
+
+export interface IconButtonProps {
+  children: ReactNode;
+  mode?: 'flat';
+  onPress?: () => void;
+}
+
+export interface TabTransactionsProps {
+  escrowData: TransactionItem[];
+  walletData: TransactionItem[];
+  showBtn?: boolean;
 }

@@ -1,5 +1,8 @@
 import EscrowIcon from '@/assets/images/Escrow';
+import EscrowFilled from '@/assets/images/EscrowFilled';
+import HomeFilled from '@/assets/images/HomeFilled';
 import SettingsIcon from '@/assets/images/Settings';
+import SettingsFilled from '@/assets/images/SettingsFilled';
 import SwapIocn from '@/assets/images/Swap';
 import { appColors } from '@/lib/commonStyles';
 import { Feather } from '@expo/vector-icons';
@@ -28,16 +31,20 @@ const TabLayout = () => {
           name='home'
           options={{
             title: 'Home',
-            tabBarIcon: ({ color, size }) => (
-              <Feather name='home' size={size} color={color} />
-            ),
+            tabBarIcon: ({ color, size, focused }) =>
+              focused ? (
+                <HomeFilled />
+              ) : (
+                <Feather name='home' size={size} color={color} />
+              ),
           }}
         />
         <Tabs.Screen
           name='Escrow'
           options={{
             title: 'Escrow',
-            tabBarIcon: ({ color, size }) => <EscrowIcon color={color} />,
+            tabBarIcon: ({ color, size, focused }) =>
+              focused ? <EscrowFilled /> : <EscrowIcon color={color} />,
           }}
         />
         <Tabs.Screen
@@ -50,7 +57,8 @@ const TabLayout = () => {
         <Tabs.Screen
           name='Settings'
           options={{
-            tabBarIcon: ({ color, size }) => <SettingsIcon color={color} />,
+            tabBarIcon: ({ color, focused }) =>
+              focused ? <SettingsFilled /> : <SettingsIcon color={color} />,
           }}
         />
       </Tabs>

@@ -3,16 +3,29 @@ import { ButtonType } from '@/lib/types';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-const Button = ({ onPress, children, style, mode }: ButtonType) => {
+const Button = ({
+  onPress,
+  children,
+  style,
+  mode,
+  icon,
+  iconPosition = 'left',
+}: ButtonType) => {
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [pressed && styles.pressed]}
+      style={({ pressed }) => [pressed && styles.pressed, style]}
     >
-      <View style={[styles.innerContainer, mode && styles[`${mode}`], style]}>
+      <View style={[styles.innerContainer, mode && styles[`${mode}`]]}>
+        <View style={styles.iconLeft}>
+          {icon && iconPosition === 'left' && icon}
+        </View>
         <Text style={[styles.buttonText, mode && styles[`${mode}Text`]]}>
           {children}
         </Text>
+        <View style={styles.iconRight}>
+          {icon && iconPosition === 'right' && icon}
+        </View>
       </View>
     </Pressable>
   );
@@ -28,8 +41,11 @@ const styles = StyleSheet.create({
   innerContainer: {
     backgroundColor: appColors.primary500,
     margin: 4,
-    padding: 14,
-    borderRadius: 8,
+    padding: 12,
+    borderRadius: 9,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   flat: {
@@ -50,7 +66,7 @@ const styles = StyleSheet.create({
     color: appColors.white,
     textAlign: 'center',
     fontWeight: 500,
-    fontSize: 18,
+    fontSize: 16,
   },
 
   flatText: {
@@ -62,5 +78,13 @@ const styles = StyleSheet.create({
 
   transparentText: {
     color: appColors.primary500,
+  },
+
+  iconLeft: {
+    marginRight: 6,
+  },
+
+  iconRight: {
+    marginLeft: 6,
   },
 });
