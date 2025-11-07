@@ -3,7 +3,16 @@ import Bank from '@/assets/images/Bank';
 import Face from '@/assets/images/Face';
 import HomeScreen1 from '@/assets/images/HomeScreen1';
 import HomeScreen2 from '@/assets/images/HomeScreen2';
-import { OnboardingItem, TransactionItem, VerificationItem } from '@/lib/types';
+import Key from '@/assets/images/Key';
+import Lock from '@/assets/images/Lock';
+import Logout from '@/assets/images/Logout';
+import Support from '@/assets/images/Support';
+import {
+  OnboardingItem,
+  ProfileItem,
+  TransactionItem,
+  VerificationItem,
+} from '@/lib/types';
 
 export const onboardingData: OnboardingItem[] = [
   {
@@ -40,7 +49,7 @@ export const verificationData: VerificationItem[] = [
   },
 ];
 
-export const transactionData: TransactionItem[] = [
+export const walletTransactionData: TransactionItem[] = [
   {
     id: 't1',
     type: 'deposit',
@@ -96,5 +105,84 @@ export const transactionData: TransactionItem[] = [
     time: '2025-11-01T18:40:00Z',
     title: 'Refund',
     description: 'Refund from cancelled order on Jumia.',
+  },
+];
+
+export const escrowTransactionData: TransactionItem[] = [
+  {
+    id: 'e1',
+    type: 'deposit',
+    amount: 25000,
+    time: '2025-11-06T10:45:00Z',
+    title: 'Escrow Deposit - Project Alpha',
+    description: 'Funds deposited for web development project milestone 1.',
+  },
+  {
+    id: 'e2',
+    type: 'withdraw',
+    amount: 10000,
+    time: '2025-11-05T15:20:00Z',
+    title: 'Release to Vendor',
+    description: 'Payment released to vendor for completed milestone.',
+  },
+  {
+    id: 'e3',
+    type: 'deposit',
+    amount: 5000,
+    time: '2025-11-04T08:55:00Z',
+    title: 'Escrow Funding - Logo Design',
+    description: 'Client funded escrow for logo design project.',
+  },
+  {
+    id: 'e4',
+    type: 'withdraw',
+    amount: 5000,
+    time: '2025-11-03T11:10:00Z',
+    title: 'Refund to Buyer',
+    description: 'Refund processed after project cancellation.',
+  },
+  {
+    id: 'e5',
+    type: 'deposit',
+    amount: 15000,
+    time: '2025-11-02T16:30:00Z',
+    title: 'Escrow Top-up',
+    description: 'Additional funds added to ongoing escrow agreement.',
+  },
+  {
+    id: 'e6',
+    type: 'withdraw',
+    amount: 7000,
+    time: '2025-11-01T09:25:00Z',
+    title: 'Vendor Payout',
+    description: 'Partial payout to vendor for phase completion.',
+  },
+];
+
+export const profile: ProfileItem[] = [
+  {
+    icon: <Bank />,
+    title: 'Account Settings',
+    description: 'Add/remove account details',
+  },
+  {
+    icon: <Lock />,
+    title: 'Change Password',
+    description: 'Change your password',
+  },
+  {
+    icon: <Key />,
+    title: 'Change Pin',
+    description: 'Change Your Pin',
+  },
+  {
+    icon: <Support />,
+    title: 'Help & Support',
+    description: 'Contact help & support',
+  },
+  {
+    icon: <Logout />,
+    title: 'Log Out',
+    description: 'Log out of your account',
   },
 ];

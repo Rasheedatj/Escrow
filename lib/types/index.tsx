@@ -54,3 +54,9 @@ export interface TabItem {
   id: string;
   title: string;
 }
+
+export interface ProfileItem {
+  icon: ReactNode;
+  title: string;
+  description: string;
+}
