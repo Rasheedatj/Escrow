@@ -1,50 +1,117 @@
-# Welcome to your Expo app 👋
+# ESCROW
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross platform mobile application that supports wallet and escrow transactions built with React Native.
 
-## Get started
+## Overview
 
-1. Install dependencies
+Escrow allow users manage thier wallet and escrow transactions using an intuitive, mobile-friendly interface.
+This project showcases my ability to convert Figma designs into clean, responsive mobile applications.
 
-   ```bash
-   npm install
-   ```
+## 🎨 Features
 
-2. Start the app
+- Clean user Interface
+- User feedback
+- State management with Redux
+- Cross platform
+- Responsive acrross devices
+- Responsive on landscape and portrait orientation
 
-   ```bash
-   npx expo start
-   ```
+## 🧠 Tech Stack
 
-In the output, you'll find options to open the app in a
+- React Native
+- Redux - State management
+- Github - deployment
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🖼️ Screenshots
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+![App Screenshot](/assets/images/escrow.png)
 
-## Get a fresh project
+## Run Locally
 
-When you're ready, run:
+Clone the project
 
 ```bash
-npm run reset-project
+  git clone https://github.com/Rasheedatj/Escrow.git
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Go to the project directory
 
-## Learn more
+```bash
+  cd Escrow
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Install dependencies
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+  npm install
+```
 
-## Join the community
+Start the server
 
-Join our community of developers creating universal apps.
+```bash
+  npm run start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📁 Folder Structure
+
+Escrow/
+│
+app/
+┣ (auth)/
+│ ┣ \_layout.tsx
+│ ┣ Onboarding.tsx
+│ ┣ Login.tsx
+│ ┣ Signup.tsx
+│ ┣ Verify.tsx
+│ ┗ AllSet.tsx
+│
+┣ (tabs)/
+│ ┣ \_layout.tsx
+│ ┣ Transactions.tsx
+│ ┣ Settings.tsx
+│ ┗ home/
+│ ┣ \_layout.tsx
+│ ┣ index.tsx
+│ ┣ NewEscrow.tsx
+│ ┣ Transactions.tsx
+│ ┗ Escrow/
+│ ┣ \_layout.tsx
+│ ┣ index.tsx
+│ ┗ Summary.tsx
+│
+┣ \_layout.tsx ← Root layout (handles splash/loading + route groups)
+┗ index.tsx ← Default route (redirects to onboarding or home)
+
+components/
+┣ Button.tsx
+┣ Input.tsx
+┣ Header.tsx
+┗ ...
+
+data/
+┗ UI.tsx ← Can contain reusable UI constants, lists, etc.
+
+lib/
+┣ index.tsx
+┗ types/
+┗ index.ts
+
+commonStyles.ts ← Global style constants
+
+## 🌟 Key Takeaways
+
+- Improved my Mobile application navigation knowledge
+
+- Enhanced my design-to-code workflow from Figma to mobile applications
+- Improved my understanding of state management with Redux.
+- Gained the experience of building FinTech applications
+
+## 🚀 About Me
+
+Rasheedat Jinadu: A mobile and web Frontend Engineer. I help founders, startups, enterprise and business owners build the ideal websites that Attract Users, Keep Users, and Generate Sales
+
+🚀 Looking for a frontend developer for your next project? Let’s talk!
+
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://rasheedatj.vercel.app/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rashedat-jinadu/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/RashedatJ)
