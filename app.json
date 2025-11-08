@@ -7,6 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "escrow",
     "userInterfaceStyle": "automatic",
+    "backgroundColor": "white",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true

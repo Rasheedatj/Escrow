@@ -80,4 +80,19 @@ export interface TabTransactionsProps {
 export interface PageTitleProp {
   children: ReactNode;
   headerRight?: React.JSX.Element;
+  hasBackButton?: boolean;
+}
+
+export interface SummaryItemProp {
+  icon: ReactNode;
+  title: string;
+  details: string;
+  style?: any;
+}
+
+export interface ProgressProp {
+  isCompleted: boolean;
+  title: string;
+  details: string;
+  id: string;
 }

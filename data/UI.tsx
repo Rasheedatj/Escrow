@@ -7,13 +7,17 @@ import Key from '@/assets/images/Key';
 import Lock from '@/assets/images/Lock';
 import Logout from '@/assets/images/Logout';
 import Support from '@/assets/images/Support';
+import { appColors } from '@/lib/commonStyles';
 import {
   OnboardingItem,
   ProfileItem,
+  ProgressProp,
+  SummaryItemProp,
   TabItem,
   TransactionItem,
   VerificationItem,
 } from '@/lib/types';
+import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 
 export const onboardingData: OnboardingItem[] = [
   {
@@ -202,5 +206,46 @@ export const transactionsTabs: TabItem[] = [
   {
     id: 'wallet',
     title: 'Wallet Transactions',
+  },
+];
+
+export const summaryItems: SummaryItemProp[] = [
+  {
+    title: 'Transaction fee:',
+    details: '$20',
+    icon: <Feather name='dollar-sign' size={16} color={appColors.primary500} />,
+  },
+  {
+    title: 'Est delivery date:',
+    details: '2nd Jan 2024',
+    icon: (
+      <AntDesign name='clock-circle' size={16} color={appColors.primary500} />
+    ),
+  },
+  {
+    title: 'Items:',
+    details: 'Macbook M1 Pro',
+    icon: <Ionicons name='cube-sharp' size={16} color={appColors.primary500} />,
+  },
+];
+
+export const Progress: ProgressProp[] = [
+  {
+    id: 'p1',
+    title: 'Transaction Accepted',
+    details: '1st jan 2023 @ 11:09PM',
+    isCompleted: true,
+  },
+  {
+    id: 'p2',
+    title: 'Processing Transaction',
+    details: 'Yesterday',
+    isCompleted: true,
+  },
+  {
+    id: 'p3',
+    title: 'Transaction Completed',
+    details: 'Not started',
+    isCompleted: false,
   },
 ];

@@ -1,30 +1,17 @@
 import { escrowTransactionData, walletTransactionData } from '@/data/UI';
 import { appColors } from '@/lib/commonStyles';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import Button from '../UI/Button';
+import NewTransactionBtn from '../transactions/NewTransactionBtn';
 import TabTransactions from '../transactions/TabTransactions';
 
 const Transactions = () => {
   const router = useRouter();
   return (
     <View>
-      <Button
-        icon={
-          <FontAwesome
-            name='long-arrow-right'
-            size={24}
-            color={appColors.primary500}
-            style={{ marginLeft: 10 }}
-          />
-        }
-        iconPosition='right'
-        mode='transparent'
-      >
-        New Escrow Transaction
-      </Button>
+      <NewTransactionBtn />
 
       <View style={styles.header}>
         <Text style={styles.transactionTitle}>Transactions</Text>
@@ -34,7 +21,7 @@ const Transactions = () => {
             styles.detailsBtn,
             pressed && styles.pressed,
           ]}
-          onPress={() => router.push('/(tabs)/home/Transactions')}
+          onPress={() => router.push('/(tabs)/Transactions')}
         >
           <Text style={styles.detailsText}>See all</Text>
           <Ionicons
@@ -48,7 +35,6 @@ const Transactions = () => {
       <TabTransactions
         escrowData={escrowTransactionData.slice(0, 3)}
         walletData={walletTransactionData.slice(0, 3)}
-        showBtn={true}
       />
     </View>
   );

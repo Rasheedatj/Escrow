@@ -1,11 +1,9 @@
 import { transactionsTabs } from '@/data/UI';
-import { appColors } from '@/lib/commonStyles';
 import { TabTransactionsProps } from '@/lib/types';
-import { FontAwesome } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { FlatList, View } from 'react-native';
-import Button from '../UI/Button';
 import Tab from '../UI/Tab';
+import NewTransactionBtn from './NewTransactionBtn';
 import TransactionItem from './TransactionItem';
 
 const TabTransactions = ({
@@ -18,23 +16,7 @@ const TabTransactions = ({
   return (
     <>
       <Tab active={active} setActive={setActive} tabItems={transactionsTabs} />
-      {showBtn && active === 'escrow' && (
-        <Button
-          icon={
-            <FontAwesome
-              name='long-arrow-right'
-              size={24}
-              color={appColors.primary500}
-              style={{ marginLeft: 10 }}
-            />
-          }
-          iconPosition='right'
-          mode='transparent'
-          style={{ marginVertical: 6 }}
-        >
-          New Escrow Transaction
-        </Button>
-      )}
+      {showBtn && active === 'escrow' && <NewTransactionBtn />}
       <View style={{ paddingBottom: 100 }}>
         <FlatList
           data={active === 'escrow' ? escrowData : walletData}
@@ -43,8 +25,6 @@ const TabTransactions = ({
           )}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
-          //   style={{ height: 1000 }}
-          // alwaysBounceVertical={false}
         />
       </View>
     </>

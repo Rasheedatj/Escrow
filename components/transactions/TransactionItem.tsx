@@ -24,7 +24,6 @@ const TransactionItem = ({
       {userTag ? (
         <View style={[styles.icon]}>
           <Image source={{ uri: userAvatar }} style={styles.icon} />
-          {/* <User /> */}
         </View>
       ) : (
         <View

@@ -28,18 +28,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 20,
     marginBottom: 8,
+    justifyContent: 'center',
   },
   item: {
     padding: 10,
     borderBottomWidth: 3,
     borderBottomColor: '#A9A9A92E',
     borderRadius: 4,
+    flex: 1,
   },
 
   text: {
     fontSize: 15.21,
     fontWeight: 500,
     color: '#29292982',
+    textAlign: 'center',
   },
 
   activeText: {

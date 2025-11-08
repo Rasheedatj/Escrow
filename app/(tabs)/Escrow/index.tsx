@@ -12,7 +12,9 @@ const EscrowScreen = () => {
   const headerRight = () => {
     return (
       <View style={styles.header}>
-        <Ionicons name='add' color={appColors.primary500} size={26} />
+        <Pressable onPress={() => router.push('/NewTransaction')}>
+          <Ionicons name='add' color={appColors.primary500} size={26} />
+        </Pressable>
         <View style={styles.filter}>
           <Text style={styles.filterText}>Filter</Text>
           <Ionicons name='filter' size={24} color={'#3B8AEE'} />

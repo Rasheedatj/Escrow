@@ -1,6 +1,6 @@
 import { InputType } from '@/lib/types';
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const Input = ({
   icon,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#0000001C',
     borderRadius: 9,
-    padding: 15,
+    paddingVertical: Platform.OS === 'ios' ? 15 : 4,
     paddingHorizontal: 16,
     backgroundColor: '#EEEEEE85',
     flexDirection: 'row',

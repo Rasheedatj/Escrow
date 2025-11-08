@@ -12,6 +12,7 @@ const TransactionsScreen = () => {
       <TabTransactions
         escrowData={escrowTransactionData}
         walletData={walletTransactionData}
+        showBtn={true}
       />
     </View>
   );

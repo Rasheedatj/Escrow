@@ -18,19 +18,6 @@ const HomeLayout = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name='Transactions'
-        options={{
-          headerTintColor: '#000000B5',
-        }}
-      />
-      <Stack.Screen
-        name='NewEscrow'
-        options={{
-          title: 'New Escrow',
-          headerTintColor: '#000000B5',
-        }}
-      />
     </Stack>
   );
 };

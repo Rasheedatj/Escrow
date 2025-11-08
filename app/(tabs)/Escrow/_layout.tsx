@@ -20,8 +20,9 @@ const EscrowLayout = () => {
       <Stack.Screen
         name='[EscrowId]'
         options={{
-          title: 'Transaction Summary',
+          headerShown: false,
           headerTintColor: '#000000B5',
+          // presentation: 'modal',
         }}
       />
     </Stack>
