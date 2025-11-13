@@ -1,18 +1,36 @@
 import Face from '@/assets/images/Face';
 import Logo from '@/assets/images/Logo';
+import PasswordVisibilityToggle from '@/components/PasswordVisibilityToggle';
 import Button from '@/components/UI/Button';
+import Input from '@/components/UI/Input';
 import Radio from '@/components/UI/Radio';
 import { appColors } from '@/lib/commonStyles';
-import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { LoginFormData, loginSchema } from '@/lib/schema';
+import { Feather, Ionicons } from '@expo/vector-icons';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Controller, useForm } from 'react-hook-form';
+import { StyleSheet, Text, View } from 'react-native';
 
 const LoginScreen = () => {
   const router = useRouter();
   const [remember, setRemember] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => router.push('/(tabs)/home');
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = (data: LoginFormData) => {
+    console.log(data);
+    router.push('/(tabs)/home');
+  };
+
   return (
     <View style={styles.root}>
       <Logo />
@@ -28,45 +46,66 @@ const LoginScreen = () => {
       </View>
 
       <View>
-        <Pressable
-          style={({ pressed }) => [styles.formItem, pressed && styles.pressed]}
-        >
-          <Ionicons name='mail-outline' size={24} color={appColors.border} />
-          <TextInput style={styles.input} placeholder='Email address' />
-        </Pressable>
-
-        <View style={styles.password}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.formItem,
-              { flex: 1 },
-              pressed && styles.pressed,
-            ]}
-          >
-            <Feather name='lock' size={24} color={appColors.border} />
-            <TextInput
-              style={styles.input}
-              placeholder='Password'
-              secureTextEntry
+        <Controller
+          name='email'
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder='Enter address'
+              value={value}
+              onChangeText={onChange}
+              iconLeft={
+                <Ionicons
+                  name='mail-outline'
+                  size={24}
+                  color={appColors.border}
+                />
+              }
+              mode='transparent'
+              autoCapitalize='none'
+              keyboardType={'email-address'}
+              errorMessage={errors.email?.message}
             />
-            <AntDesign
-              name='eye-invisible'
-              size={24}
-              color={appColors.border}
-            />
-          </Pressable>
+          )}
+        />
 
-          <View style={styles.face}>
-            <Face color='#2C2828' />
-          </View>
-        </View>
+        <Controller
+          name='password'
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <View style={styles.password}>
+              <Input
+                placeholder='Password'
+                value={value}
+                onChangeText={onChange}
+                iconLeft={
+                  <Feather name='lock' size={24} color={appColors.border} />
+                }
+                iconRight={
+                  <PasswordVisibilityToggle
+                    show={showPassword}
+                    onPress={() => setShowPassword((s) => !s)}
+                  />
+                }
+                isPassword={!showPassword}
+                mode='transparent'
+                style={styles.passwordInput}
+                errorMessage={errors.password?.message}
+              />
+
+              <View style={styles.face}>
+                <Face color='#2C2828' />
+              </View>
+            </View>
+          )}
+        />
 
         <View style={styles.footer}>
           <Radio label='Remember me' value={remember} setValue={setRemember} />
 
           <Text style={styles.forgot}>Forgot password?</Text>
         </View>
-        <Button onPress={handleLogin}>Log In</Button>
+        <Button onPress={handleSubmit(onSubmit)}>Log In</Button>
       </View>
     </View>
   );
@@ -119,31 +158,13 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 
-  formItem: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: appColors.border,
-    paddingHorizontal: 15,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginBottom: 25,
-  },
-
-  pressed: {
-    borderColor: appColors.primary500,
-  },
-
-  input: {
-    marginHorizontal: 8,
-    height: 40,
-    flex: 1,
-  },
-
   password: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  passwordInput: {
+    flex: 1,
   },
 
   face: {
@@ -153,7 +174,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CFCFCF33',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 25,
     marginLeft: 10,
+    marginBottom: 35,
   },
 });

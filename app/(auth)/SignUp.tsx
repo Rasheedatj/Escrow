@@ -1,18 +1,61 @@
 import Logo from '@/assets/images/Logo';
+import PasswordVisibilityToggle from '@/components/PasswordVisibilityToggle';
 import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import { appColors } from '@/lib/commonStyles';
-import { Ionicons } from '@expo/vector-icons';
+import { SignUpFormData, signUpSchema } from '@/lib/schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useRouter } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 const SignUpScreen = () => {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
-  const handleCreateAccount = () => router.push('/(auth)/AllSet');
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+  });
+
+  const onSubmit = (data: SignUpFormData) => {
+    Toast.show({
+      type: 'custom_success',
+      props: {
+        message: 'Welcome to Escrow',
+        // onPress: () => router.push(`/post/${postId}`),
+      },
+    });
+
+    new Promise((resolve, reject) =>
+      setTimeout(() => {
+        router.push('/(auth)/AllSet');
+      }, 5000)
+    );
+  };
+
+  const handleToggle = (type: 'password' | 'confirmPassword') =>
+    setShowPassword((cur) => {
+      return {
+        ...cur,
+        [type]: !cur[type],
+      };
+    });
+
   return (
-    <View style={styles.root}>
+    <ScrollView
+      alwaysBounceVertical={false}
+      showsVerticalScrollIndicator={false}
+      style={styles.root}
+    >
       <Logo />
 
       <View>
@@ -26,36 +69,88 @@ const SignUpScreen = () => {
       </View>
 
       <View>
-        <Input
-          label='Full Name'
-          placeholder='e.g John Doe'
-          style={{ marginBottom: 24 }}
-        />
-        <Input
-          label='Email'
-          placeholder='e.g John@doe.com'
-          style={{ marginBottom: 24 }}
-        />
-        <Input
-          label='Password'
-          placeholder='*********'
-          isPassword={true}
-          icon={<Ionicons name='eye' size={24} color={'#494848'} />}
-          style={{ marginBottom: 24 }}
-        />
-        <Input
-          label='Confirm Password'
-          placeholder='*********'
-          isPassword={true}
-          icon={<Ionicons name='eye' size={24} color='#494848' />}
-          style={{ marginBottom: 24 }}
+        <Controller
+          name='name'
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              label='Full Name'
+              placeholder='e.g John Doe'
+              style={{ marginBottom: 24 }}
+              autoCapitalize='words'
+              value={value}
+              onChangeText={onChange}
+              errorMessage={errors.name?.message}
+            />
+          )}
         />
 
-        <Button style={styles.button} onPress={handleCreateAccount}>
+        <Controller
+          name='email'
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              label='Email'
+              placeholder='e.g John@doe.com'
+              style={{ marginBottom: 24 }}
+              keyboardType={'email-address'}
+              autoCapitalize='none'
+              value={value}
+              onChangeText={onChange}
+              errorMessage={errors.email?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name='password'
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              label='Password'
+              placeholder='*********'
+              isPassword={!showPassword.password}
+              iconRight={
+                <PasswordVisibilityToggle
+                  show={showPassword.password}
+                  onPress={() => handleToggle('password')}
+                />
+              }
+              style={{ marginBottom: 24 }}
+              value={value}
+              onChangeText={onChange}
+              errorMessage={errors.password?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name='confirmPassword'
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              label='Confirm Password'
+              placeholder='*********'
+              isPassword={!showPassword.confirmPassword}
+              iconRight={
+                <PasswordVisibilityToggle
+                  show={showPassword.confirmPassword}
+                  onPress={() => handleToggle('confirmPassword')}
+                />
+              }
+              style={{ marginBottom: 24 }}
+              value={value}
+              onChangeText={onChange}
+              errorMessage={errors.confirmPassword?.message}
+            />
+          )}
+        />
+
+        <Button style={styles.button} onPress={handleSubmit(onSubmit)}>
           Create Account
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

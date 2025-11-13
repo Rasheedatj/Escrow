@@ -23,12 +23,13 @@ export interface ButtonType {
 }
 
 export interface InputType {
-  placeholder: string;
   label?: string;
   isPassword?: boolean;
-  icon?: ReactNode;
-  iconPosition?: 'left' | 'right';
+  iconLeft?: ReactNode;
+  iconRight?: any;
   style?: any;
+  mode?: 'flat' | 'transparent';
+  errorMessage?: string | undefined;
 }
 
 export interface RadioType {
@@ -95,4 +96,9 @@ export interface ProgressProp {
   title: string;
   details: string;
   id: string;
+}
+
+export interface ShowProps {
+  show: boolean;
+  onPress: () => void;
 }

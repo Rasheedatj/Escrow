@@ -1,33 +1,57 @@
 import { InputType } from '@/lib/types';
 import React from 'react';
-import { Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from 'react-native';
 
 const Input = ({
-  icon,
+  iconRight,
+  iconLeft,
   placeholder,
   isPassword,
-  iconPosition = 'right',
   label,
   style,
-}: InputType) => {
+  autoCapitalize,
+  autoCorrect = false,
+  mode = 'flat',
+  value,
+  onChangeText,
+  errorMessage,
+}: InputType & TextInputProps) => {
   return (
-    <View style={style}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={styles.container}>
-        {icon && iconPosition === 'left' && icon}
+    <View style={[styles.main, style]}>
+      {label && (
+        <Text style={[styles.label, errorMessage && styles.errorLabel]}>
+          {label}
+        </Text>
+      )}
+      <View
+        style={[
+          styles.inputContainer,
+          errorMessage && styles.errorInputContainer,
+          mode === 'transparent' && styles.transparent,
+        ]}
+      >
+        {iconLeft && <View style={styles.left}>{iconLeft}</View>}
 
         <TextInput
+          value={value}
+          onChangeText={onChangeText}
           placeholder={placeholder}
-          autoCapitalize='none'
           secureTextEntry={isPassword}
-          style={[
-            styles.input,
-            iconPosition === 'left' && styles.left,
-            iconPosition === 'right' && styles.right,
-          ]}
+          style={styles.input}
+          autoCorrect={autoCorrect}
+          autoCapitalize={isPassword ? 'none' : autoCapitalize}
         />
-        {icon && iconPosition === 'right' && icon}
+
+        {iconRight && <View style={styles.right}>{iconRight}</View>}
       </View>
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
   );
 };
@@ -35,7 +59,11 @@ const Input = ({
 export default Input;
 
 const styles = StyleSheet.create({
-  container: {
+  main: {
+    marginBottom: 20,
+  },
+
+  inputContainer: {
     borderWidth: 1,
     borderColor: '#0000001C',
     borderRadius: 9,
@@ -46,11 +74,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+
+  errorInputContainer: {
+    borderColor: '#D32F2F',
+  },
+
+  transparent: {
+    backgroundColor: 'transparent',
+  },
+
   label: {
     paddingBottom: 10,
     color: '#707070A1',
     fontWeight: 500,
     fontSize: 17,
+  },
+
+  errorLabel: {
+    color: '#D32F2F',
   },
 
   input: {
@@ -60,9 +101,16 @@ const styles = StyleSheet.create({
   },
 
   left: {
+    marginRight: 10,
+  },
+
+  right: {
     marginLeft: 10,
   },
-  right: {
-    marginRight: 10,
+
+  errorText: {
+    color: '#D32F2F',
+    paddingTop: 6,
+    fontSize: 12,
   },
 });

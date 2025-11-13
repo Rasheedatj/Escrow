@@ -12,7 +12,7 @@ const OnboardingScreen = () => {
   useEffect(() => {
     const timeOutId = setTimeout(() => {
       setActive('onb-2');
-    }, 5000);
+    }, 7000);
 
     return () => clearTimeout(timeOutId);
   }, [active]);
