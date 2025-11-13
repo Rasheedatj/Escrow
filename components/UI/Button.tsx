@@ -1,7 +1,13 @@
 import { appColors } from '@/lib/commonStyles';
 import { ButtonType } from '@/lib/types';
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const Button = ({
   onPress,
@@ -10,21 +16,33 @@ const Button = ({
   mode,
   icon,
   iconPosition = 'left',
+  isLoading = false,
 }: ButtonType) => {
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [pressed && styles.pressed, style]}
+      style={({ pressed }) => [
+        pressed && styles.pressed,
+        isLoading && styles.disabled,
+        style,
+      ]}
+      disabled={isLoading}
     >
       <View style={[styles.innerContainer, mode && styles[`${mode}`]]}>
         <View style={styles.iconLeft}>
-          {icon && iconPosition === 'left' && icon}
+          {icon && !isLoading && iconPosition === 'left' && icon}
         </View>
+
+        {isLoading && (
+          <ActivityIndicator color='white' style={{ marginRight: 8 }} />
+        )}
+
         <Text style={[styles.buttonText, mode && styles[`${mode}Text`]]}>
           {children}
         </Text>
+
         <View style={styles.iconRight}>
-          {icon && iconPosition === 'right' && icon}
+          {icon && !isLoading && iconPosition === 'right' && icon}
         </View>
       </View>
     </Pressable>
@@ -36,6 +54,10 @@ export default Button;
 const styles = StyleSheet.create({
   pressed: {
     opacity: 0.85,
+  },
+
+  disabled: {
+    opacity: 0.8,
   },
 
   innerContainer: {

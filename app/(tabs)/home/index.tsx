@@ -4,6 +4,7 @@ import ProfileHeader from '@/components/home/ProfileHeader';
 import Tag from '@/components/home/Tag';
 import Transactions from '@/components/home/Transactions';
 import { globalStyles } from '@/lib/commonStyles';
+import { Link } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
@@ -23,6 +24,7 @@ const HomeScreen = () => {
   }, [isBannerOpen]);
   return (
     <View style={globalStyles.rootContainer}>
+      <Link href='/(auth)/Login'>Go to login</Link>
       {isBannerOpen ? <Banner onClose={closeBanner} /> : <ProfileHeader />}
       <Hero />
       <Tag openBanner={openBanner} />

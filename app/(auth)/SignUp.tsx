@@ -3,7 +3,9 @@ import PasswordVisibilityToggle from '@/components/PasswordVisibilityToggle';
 import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import { appColors } from '@/lib/commonStyles';
+import { useCreateUser } from '@/lib/queries';
 import { SignUpFormData, signUpSchema } from '@/lib/schema';
+import { useAuth } from '@/lib/store/authContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
@@ -17,6 +19,8 @@ const SignUpScreen = () => {
     password: false,
     confirmPassword: false,
   });
+  const { createUserMutation, isPending } = useCreateUser();
+  const { login } = useAuth();
 
   const {
     control,
@@ -26,19 +30,25 @@ const SignUpScreen = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit = (data: SignUpFormData) => {
-    Toast.show({
-      type: 'custom_success',
-      props: {
-        message: 'Welcome to Escrow',
-        // onPress: () => router.push(`/post/${postId}`),
-      },
-    });
-
-    new Promise((resolve, reject) =>
-      setTimeout(() => {
-        router.push('/(auth)/AllSet');
-      }, 5000)
+  const onSubmit = async (data: SignUpFormData) => {
+    const { email, password } = data;
+    await createUserMutation(
+      { email, password, returnSecureToken: true },
+      {
+        onSuccess: (data) => {
+          login(data);
+          // router.push('/(auth)/AllSet');
+        },
+        onError: (error: any) => {
+          Toast.show({
+            type: 'custom_success',
+            props: {
+              message: error.response.data.error.message,
+              type: 'error',
+            },
+          });
+        },
+      }
     );
   };
 
@@ -146,8 +156,12 @@ const SignUpScreen = () => {
           )}
         />
 
-        <Button style={styles.button} onPress={handleSubmit(onSubmit)}>
-          Create Account
+        <Button
+          style={styles.button}
+          onPress={handleSubmit(onSubmit)}
+          isLoading={isPending}
+        >
+          {isPending ? 'Creating user...' : ' Create Account'}
         </Button>
       </View>
     </ScrollView>

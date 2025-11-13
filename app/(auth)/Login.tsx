@@ -5,18 +5,23 @@ import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import Radio from '@/components/UI/Radio';
 import { appColors } from '@/lib/commonStyles';
+import { useLogin } from '@/lib/queries';
 import { LoginFormData, loginSchema } from '@/lib/schema';
+import { useAuth } from '@/lib/store/authContext';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, Text, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 const LoginScreen = () => {
   const router = useRouter();
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { loginMutation, isPending } = useLogin();
+  const { login } = useAuth();
 
   const {
     control,
@@ -26,9 +31,35 @@ const LoginScreen = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
-    router.push('/(tabs)/home');
+  const onSubmit = async (data: LoginFormData) => {
+    const { email, password } = data;
+    // email jane@doe.com | john@doe.com | john@doe2.com
+    // password: Password21
+    await loginMutation(
+      { email, password, returnSecureToken: true },
+      {
+        onSuccess: (data) => {
+          login(data);
+          Toast.show({
+            type: 'custom_success',
+            props: {
+              message: 'Welcome back!',
+              type: 'success',
+            },
+          });
+          router.push('/(tabs)/home');
+        },
+        onError: (error: any) => {
+          Toast.show({
+            type: 'custom_success',
+            props: {
+              message: error.response.data.error.message,
+              type: 'error',
+            },
+          });
+        },
+      }
+    );
   };
 
   return (
@@ -44,6 +75,8 @@ const LoginScreen = () => {
           </Link>
         </Text>
       </View>
+
+      <Link href={'/(tabs)/home'}>go home</Link>
 
       <View>
         <Controller
@@ -105,7 +138,9 @@ const LoginScreen = () => {
 
           <Text style={styles.forgot}>Forgot password?</Text>
         </View>
-        <Button onPress={handleSubmit(onSubmit)}>Log In</Button>
+        <Button onPress={handleSubmit(onSubmit)} isLoading={isPending}>
+          {isPending ? 'Logging In...' : 'Log In'}
+        </Button>
       </View>
     </View>
   );
@@ -161,10 +196,12 @@ const styles = StyleSheet.create({
   password: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 20,
   },
 
   passwordInput: {
     flex: 1,
+    marginBottom: 0,
   },
 
   face: {
@@ -175,6 +212,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 10,
-    marginBottom: 35,
   },
 });

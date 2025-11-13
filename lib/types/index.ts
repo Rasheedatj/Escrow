@@ -20,6 +20,7 @@ export interface ButtonType {
   iconPosition?: 'left' | 'right';
   style?: any;
   mode?: 'transparent' | 'flat' | 'white';
+  isLoading?: boolean;
 }
 
 export interface InputType {
@@ -101,4 +102,16 @@ export interface ProgressProp {
 export interface ShowProps {
   show: boolean;
   onPress: () => void;
+}
+
+export interface LoginProps {
+  email: string;
+  password: string;
+  returnSecureToken: boolean;
+}
+
+export interface CreateUserProps {
+  email: string;
+  password: string;
+  returnSecureToken: boolean;
 }

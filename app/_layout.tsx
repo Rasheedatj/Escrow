@@ -1,43 +1,66 @@
-import { appColors } from '@/lib/commonStyles';
-import { Stack, useSegments } from 'expo-router';
-import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { queryClient, toastConfig } from '@/lib/config';
+import AuthProvider, { useAuth } from '@/lib/store/authContext';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { Slot, Stack, useRouter, useSegments } from 'expo-router';
+import { useEffect } from 'react';
+import { Platform, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
-const toastConfig = {
-  custom_success: ({ props }: { props: any }) => (
-    <TouchableOpacity
-      onPress={props.onPress}
-      style={{
-        width: '90%',
-        marginTop: 20,
-        backgroundColor: appColors.primary50,
-        borderColor: appColors.primary100,
-        borderWidth: 1,
-        borderRadius: 10,
-        paddingVertical: 14,
-        paddingHorizontal: 18,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 3,
+function AuthStack() {
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        animation: Platform.OS === 'ios' ? 'none' : 'slide_from_right',
       }}
     >
-      <Text
-        style={{
-          color: appColors.primary600,
-          fontSize: 15,
-          fontWeight: '600',
+      <Stack.Screen name='(auth)' />
+    </Stack>
+  );
+}
+
+function ProtectedStack() {
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        animation: Platform.OS === 'ios' ? 'none' : 'slide_from_right',
+      }}
+    >
+      <Stack.Screen name='(tabs)' />
+      <Stack.Screen
+        name='NewTransaction'
+        options={{
+          title: 'New Escrow',
+          contentStyle: {
+            backgroundColor: 'white',
+          },
         }}
-      >
-        {props.message}
-      </Text>
-    </TouchableOpacity>
-  ),
-};
+      />
+    </Stack>
+  );
+}
+
+function AuthRedirectController() {
+  const { user } = useAuth();
+  const router = useRouter();
+  const segments = useSegments();
+
+  useEffect(() => {
+    if (!segments.length) return;
+
+    const isAuthRoute = segments[0] === '(auth)';
+
+    if (!user && !isAuthRoute) {
+      router.replace('/(auth)/Onboarding');
+    } else if (user && isAuthRoute) {
+      router.replace('/(tabs)/home');
+    }
+  }, [user, segments, router]);
+
+  return <Slot />;
+}
 
 export default function RootLayout() {
   const segments = useSegments();
@@ -46,25 +69,12 @@ export default function RootLayout() {
 
   return (
     <Container style={{ flex: 1, backgroundColor: 'white' }} edges={['top']}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          animation: Platform.OS === 'ios' ? 'none' : 'slide_from_right',
-        }}
-      >
-        <Stack.Screen name='(tabs)' />
-        <Stack.Screen name='(auth)' />
-        <Stack.Screen
-          name='NewTransaction'
-          options={{
-            title: 'New Escrow',
-            contentStyle: {
-              backgroundColor: 'white',
-            },
-          }}
-        />
-      </Stack>
-      <Toast config={toastConfig} visibilityTime={3000} />
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AuthRedirectController />
+        </AuthProvider>
+      </QueryClientProvider>
+      <Toast config={toastConfig} visibilityTime={5000} />
     </Container>
   );
 }
