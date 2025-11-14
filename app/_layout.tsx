@@ -2,6 +2,7 @@ import { queryClient, toastConfig } from '@/lib/config';
 import AuthProvider, { useAuth } from '@/lib/store/authContext';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Slot, Stack, useRouter, useSegments } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { Platform, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -42,8 +43,10 @@ function ProtectedStack() {
   );
 }
 
+SplashScreen.preventAutoHideAsync();
+
 function AuthRedirectController() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const router = useRouter();
   const segments = useSegments();
 
@@ -59,6 +62,15 @@ function AuthRedirectController() {
     }
   }, [user, segments, router]);
 
+  useEffect(() => {
+    async function hideSplash() {
+      if (!isLoading) await SplashScreen.hideAsync();
+    }
+
+    hideSplash();
+  }, [isLoading]);
+
+  if (isLoading) return null;
   return <Slot />;
 }
 

@@ -170,34 +170,6 @@ export const escrowTransactionData: TransactionItem[] = [
   },
 ];
 
-export const profile: ProfileItem[] = [
-  {
-    icon: <Bank />,
-    title: 'Account Settings',
-    description: 'Add/remove account details',
-  },
-  {
-    icon: <Lock />,
-    title: 'Change Password',
-    description: 'Change your password',
-  },
-  {
-    icon: <Key />,
-    title: 'Change Pin',
-    description: 'Change Your Pin',
-  },
-  {
-    icon: <Support />,
-    title: 'Help & Support',
-    description: 'Contact help & support',
-  },
-  {
-    icon: <Logout />,
-    title: 'Log Out',
-    description: 'Log out of your account',
-  },
-];
-
 export const transactionsTabs: TabItem[] = [
   {
     id: 'escrow',

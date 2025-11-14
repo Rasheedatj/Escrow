@@ -18,7 +18,6 @@ export const login = async ({
         returnSecureToken,
       }
     );
-    console.log(res.data);
     return res.data;
   } catch (error) {
     throw error;

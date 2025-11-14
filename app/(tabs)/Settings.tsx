@@ -1,13 +1,49 @@
+import Bank from '@/assets/images/Bank';
+import Key from '@/assets/images/Key';
+import Lock from '@/assets/images/Lock';
+import Logout from '@/assets/images/Logout';
+import Support from '@/assets/images/Support';
 import User from '@/assets/images/User';
 import SettingItem from '@/components/SettingItem';
 import PageTitle from '@/components/UI/PageTitle';
-import { profile } from '@/data/UI';
 import { globalStyles } from '@/lib/commonStyles';
+import { useAuth } from '@/lib/store/authContext';
+import { ProfileItem } from '@/lib/types';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const SettingsScreen = () => {
+  const { logout } = useAuth();
+  const profile: ProfileItem[] = [
+    {
+      icon: <Bank />,
+      title: 'Account Settings',
+      description: 'Add/remove account details',
+    },
+    {
+      icon: <Lock />,
+      title: 'Change Password',
+      description: 'Change your password',
+    },
+    {
+      icon: <Key />,
+      title: 'Change Pin',
+      description: 'Change Your Pin',
+    },
+    {
+      icon: <Support />,
+      title: 'Help & Support',
+      description: 'Contact help & support',
+    },
+    {
+      icon: <Logout />,
+      title: 'Log Out',
+      description: 'Log out of your account',
+      onPress: logout,
+    },
+  ];
+
   return (
     <View style={globalStyles.rootContainer}>
       <PageTitle>Settings</PageTitle>
@@ -22,7 +58,7 @@ const SettingsScreen = () => {
 
       <ScrollView>
         {profile.map((item) => (
-          <SettingItem key={item.title} profile={item} />
+          <SettingItem key={item.title} profile={item} onPress={item.onPress} />
         ))}
       </ScrollView>
     </View>

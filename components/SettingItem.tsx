@@ -1,12 +1,33 @@
 import { appColors } from '@/lib/commonStyles';
 import { ProfileItem } from '@/lib/types';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
-const SettingItem = ({ profile }: { profile: ProfileItem }) => {
+const SettingItem = ({
+  profile,
+  onPress,
+}: {
+  profile: ProfileItem;
+  onPress?: () => void;
+}) => {
   const { title, description, icon } = profile;
+  const handlePress = () => {
+    Alert.alert('Confirm action', 'Are you sure you want to log out?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Logout',
+        onPress: onPress,
+      },
+    ]);
+  };
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={handlePress}
+      style={({ pressed }) => [styles.container, pressed && styles.pressed]}
+    >
       <View style={[styles.icon, title === 'Log Out' && styles.logout]}>
         {icon}
       </View>
@@ -14,7 +35,7 @@ const SettingItem = ({ profile }: { profile: ProfileItem }) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -31,6 +52,11 @@ const styles = StyleSheet.create({
 
   logout: {
     backgroundColor: appColors.danger100,
+  },
+
+  pressed: {
+    opacity: 0.85,
+    backgroundColor: '#faf7f799',
   },
 
   icon: {

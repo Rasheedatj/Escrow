@@ -76,8 +76,6 @@ const LoginScreen = () => {
         </Text>
       </View>
 
-      <Link href={'/(tabs)/home'}>go home</Link>
-
       <View>
         <Controller
           name='email'

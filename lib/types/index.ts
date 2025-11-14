@@ -65,6 +65,7 @@ export interface ProfileItem {
   icon: ReactNode;
   title: string;
   description: string;
+  onPress?: () => void;
 }
 
 export interface IconButtonProps {

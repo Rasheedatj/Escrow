@@ -1,4 +1,5 @@
-import { createContext, ReactNode, use, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, ReactNode, use, useEffect, useState } from 'react';
 
 interface User {
   idToken: string;
@@ -14,6 +15,7 @@ interface ContextType {
   isAuthenticated: boolean;
   logout: () => void;
   login: (user: User) => void;
+  isLoading: boolean;
 }
 
 const initialState: ContextType = {
@@ -21,24 +23,39 @@ const initialState: ContextType = {
   isAuthenticated: false,
   logout: () => {},
   login: () => {},
+  isLoading: true,
 };
 
 const AuthContext = createContext<ContextType>(initialState);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const login = (user: User) => {
+  useEffect(() => {
+    async function fetchToken() {
+      const storedUser = await AsyncStorage.getItem('user');
+
+      if (storedUser) setUser(JSON.parse(storedUser));
+
+      setIsLoading(false);
+    }
+    fetchToken();
+  }, []);
+
+  const login = async (user: User) => {
     setUser(user);
+    await AsyncStorage.setItem('user', JSON.stringify(user));
   };
 
-  const logout = () => {
+  const logout = async () => {
     setUser(null);
+    await AsyncStorage.removeItem('user');
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, isAuthenticated: !!user }}
+      value={{ user, login, logout, isAuthenticated: !!user, isLoading }}
     >
       {children}
     </AuthContext.Provider>
