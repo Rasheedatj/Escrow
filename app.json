@@ -45,5 +45,8 @@
       "typedRoutes": true,
       "reactCompiler": true
     }
+  },
+  "extra": {
+    "API_KEY": "AIzaSyBi33yF4IGhgHzzljkiIyALkmQ2QbqyxR0"
   }
 }

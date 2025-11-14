@@ -19,6 +19,7 @@
     "@react-navigation/native": "^7.1.8",
     "@tanstack/react-query": "^5.90.8",
     "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
     "expo": "~54.0.22",
     "expo-app-loading": "^2.1.1",
     "expo-constants": "~18.0.10",
