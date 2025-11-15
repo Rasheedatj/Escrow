@@ -1,3 +1,4 @@
+import { deviceWidth } from '@/lib/helpers';
 import { InputType } from '@/lib/types';
 import React from 'react';
 import {
@@ -60,15 +61,18 @@ export default Input;
 
 const styles = StyleSheet.create({
   main: {
-    marginBottom: 20,
+    marginBottom: deviceWidth > 400 ? 20 : 18,
   },
 
   inputContainer: {
     borderWidth: 1,
     borderColor: '#0000001C',
     borderRadius: 9,
-    paddingVertical: Platform.OS === 'ios' ? 15 : 4,
-    paddingHorizontal: 16,
+    paddingVertical: Platform.select({
+      ios: deviceWidth > 400 ? 15 : 12,
+      android: deviceWidth > 400 ? 4 : 2,
+    }),
+    paddingHorizontal: deviceWidth > 400 ? 16 : 12,
     backgroundColor: '#EEEEEE85',
     flexDirection: 'row',
     alignItems: 'center',
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     color: '#707070A1',
     fontWeight: 500,
-    fontSize: 17,
+    fontSize: deviceWidth > 400 ? 17 : 14,
   },
 
   errorLabel: {
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
 
   input: {
     color: '#5C5C5C',
-    fontSize: 16,
+    fontSize: deviceWidth > 400 ? 16 : 14,
     flex: 1,
   },
 

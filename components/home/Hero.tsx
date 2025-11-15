@@ -1,5 +1,5 @@
 import LockOutline from '@/assets/images/LockOutline';
-import { formatCurrency } from '@/lib/helpers';
+import { deviceWidth, formatCurrency } from '@/lib/helpers';
 import { AntDesign, Entypo, Feather, Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -30,18 +30,36 @@ const Hero = () => {
       <View style={styles.buttons}>
         {activeHero === 'Wallet' ? (
           <>
-            <Button icon={<AntDesign name='plus' size={22} color='white' />}>
+            <Button
+              icon={
+                <AntDesign
+                  name='plus'
+                  size={deviceWidth > 400 ? 22 : 18}
+                  color='white'
+                />
+              }
+            >
               {' '}
               Fund Wallet
             </Button>
             <Button
               mode='flat'
-              icon={<Feather name='download' size={22} color='#2D2D2D87' />}
+              icon={
+                <Feather
+                  name='download'
+                  size={deviceWidth > 400 ? 22 : 18}
+                  color='#2D2D2D87'
+                />
+              }
             >
               Withdraw
             </Button>
             <IconButton onPress={() => setActiveHero('Escrow')} mode='flat'>
-              <Ionicons name='chevron-forward' size={23} color='#858585' />
+              <Ionicons
+                name='chevron-forward'
+                size={deviceWidth > 400 ? 22 : 18}
+                color='#858585'
+              />
             </IconButton>
           </>
         ) : (
@@ -51,7 +69,11 @@ const Hero = () => {
             </IconButton>
 
             <IconButton onPress={() => setActiveHero('Wallet')} mode='flat'>
-              <Ionicons name='chevron-back' size={23} color='#858585' />
+              <Ionicons
+                name='chevron-back'
+                size={deviceWidth > 400 ? 22 : 18}
+                color='#858585'
+              />
             </IconButton>
           </>
         )}
@@ -73,13 +95,13 @@ const styles = StyleSheet.create({
 
   heroTitle: {
     color: '#000000AD',
-    fontSize: 16,
-    paddingBottom: 20,
+    fontSize: deviceWidth > 400 ? 16 : 14,
+    paddingBottom: deviceWidth > 400 ? 20 : 16,
   },
 
   balance: {
     color: '#000000C9',
-    fontSize: 27,
+    fontSize: deviceWidth > 400 ? 27 : 22,
     fontWeight: 'bold',
     marginRight: 10,
   },
@@ -93,6 +115,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 30,
+    marginTop: deviceWidth > 400 ? 30 : 20,
   },
 });

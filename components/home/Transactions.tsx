@@ -1,5 +1,6 @@
 import { escrowTransactionData, walletTransactionData } from '@/data/UI';
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -35,6 +36,7 @@ const Transactions = () => {
       <TabTransactions
         escrowData={escrowTransactionData.slice(0, 3)}
         walletData={walletTransactionData.slice(0, 3)}
+        isFlatList={false}
       />
     </View>
   );
@@ -57,14 +59,14 @@ const styles = StyleSheet.create({
 
   transactionTitle: {
     color: '#292929',
-    fontSize: 18,
+    fontSize: deviceWidth > 400 ? 18 : 16,
     fontWeight: 500,
   },
 
   detailsText: {
     paddingRight: 6,
     fontWeight: 500,
-    fontSize: 15.7,
+    fontSize: deviceWidth > 400 ? 15.7 : 14,
     color: appColors.primary500,
   },
 

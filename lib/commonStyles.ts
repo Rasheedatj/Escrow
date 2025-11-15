@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { deviceWidth } from './helpers';
 
 export const appColors = {
   primary50: '#F4FAFF',
@@ -27,7 +28,7 @@ export const globalStyles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 32.91,
+    fontSize: deviceWidth > 400 ? 32.91 : 26,
     color: appColors.black,
     fontWeight: 500,
     paddingBottom: 10,
@@ -36,7 +37,7 @@ export const globalStyles = StyleSheet.create({
 
   description: {
     color: '#A8A8A8',
-    fontSize: 17,
+    fontSize: deviceWidth > 400 ? 17 : 14,
     marginBottom: 30,
     lineHeight: 22,
   },

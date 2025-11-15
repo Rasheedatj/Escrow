@@ -7,6 +7,7 @@ import User from '@/assets/images/User';
 import SettingItem from '@/components/SettingItem';
 import PageTitle from '@/components/UI/PageTitle';
 import { globalStyles } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { useAuth } from '@/lib/store/authContext';
 import { ProfileItem } from '@/lib/types';
 import { Ionicons } from '@expo/vector-icons';
@@ -85,9 +86,9 @@ const styles = StyleSheet.create({
   },
 
   profileTitle: {
-    fontSize: 15.64,
+    fontSize: deviceWidth > 400 ? 15.64 : 14,
     fontWeight: 500,
-    paddingBottom: 5,
+    paddingBottom: deviceWidth > 400 ? 5 : 3,
     color: '#2E2F31',
   },
   profileDescription: {

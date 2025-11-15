@@ -78,6 +78,7 @@ export interface TabTransactionsProps {
   escrowData: TransactionItem[];
   walletData: TransactionItem[];
   showBtn?: boolean;
+  isFlatList?: boolean;
 }
 
 export interface PageTitleProp {

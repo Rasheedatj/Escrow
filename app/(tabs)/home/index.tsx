@@ -5,7 +5,7 @@ import Tag from '@/components/home/Tag';
 import Transactions from '@/components/home/Transactions';
 import { globalStyles } from '@/lib/commonStyles';
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 const HomeScreen = () => {
   const [isBannerOpen, setOpenBanner] = useState(false);
@@ -33,12 +33,16 @@ const HomeScreen = () => {
     return () => clearTimeout(timerId);
   }, [isBannerOpen]);
   return (
-    <View style={[globalStyles.rootContainer, { flex: 1 }]}>
+    <ScrollView
+      style={[globalStyles.rootContainer, { flex: 1 }]}
+      alwaysBounceVertical={false}
+      showsVerticalScrollIndicator={false}
+    >
       {isBannerOpen ? <Banner onClose={closeBanner} /> : <ProfileHeader />}
       <Hero />
       <Tag openBanner={openBanner} />
       <Transactions />
-    </View>
+    </ScrollView>
   );
 };
 

@@ -1,4 +1,5 @@
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { ButtonType } from '@/lib/types';
 import React from 'react';
 import {
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     backgroundColor: appColors.primary500,
     margin: 4,
-    padding: 12,
+    padding: deviceWidth > 400 ? 12 : 10,
     borderRadius: 9,
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     color: appColors.white,
     textAlign: 'center',
     fontWeight: 500,
-    fontSize: 16,
+    fontSize: deviceWidth > 400 ? 16 : 14,
   },
 
   flatText: {

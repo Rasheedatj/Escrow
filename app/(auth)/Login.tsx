@@ -5,6 +5,7 @@ import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import Radio from '@/components/UI/Radio';
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { useLogin } from '@/lib/queries';
 import { LoginFormData, loginSchema } from '@/lib/schema';
 import { useAuth } from '@/lib/store/authContext';
@@ -53,7 +54,7 @@ const LoginScreen = () => {
           Toast.show({
             type: 'custom_success',
             props: {
-              message: error.response.data.error.message,
+              message: error.response?.data?.error?.message,
               type: 'error',
             },
           });
@@ -66,15 +67,10 @@ const LoginScreen = () => {
     <View style={styles.root}>
       <Logo />
 
-      <View>
-        <Text style={styles.title}>Log in to your account</Text>
-        <Text style={styles.description}>
-          Don&apos;t have an account?{' '}
-          <Link href={'/(auth)/SignUp'} style={styles.link}>
-            Create account
-          </Link>
-        </Text>
-      </View>
+      {/* <View> */}
+      <Text style={styles.title}>Log in to your account</Text>
+
+      {/* </View> */}
 
       <View>
         <Controller
@@ -136,9 +132,20 @@ const LoginScreen = () => {
 
           <Text style={styles.forgot}>Forgot password?</Text>
         </View>
-        <Button onPress={handleSubmit(onSubmit)} isLoading={isPending}>
+        <Button
+          onPress={handleSubmit(onSubmit)}
+          isLoading={isPending}
+          style={styles.button}
+        >
           {isPending ? 'Logging In...' : 'Log In'}
         </Button>
+
+        <Text style={styles.description}>
+          Don&apos;t have an account?{' '}
+          <Link href={'/(auth)/SignUp'} style={styles.link}>
+            Create account
+          </Link>
+        </Text>
       </View>
     </View>
   );
@@ -152,17 +159,19 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 32.91,
+    fontSize: deviceWidth > 400 ? 32.91 : 26,
     color: appColors.black,
     fontWeight: 500,
     paddingBottom: 10,
     marginTop: 45,
+    marginBottom: 20,
   },
 
   description: {
     color: '#A8A8A8',
-    fontSize: 17,
-    marginBottom: 30,
+    fontSize: deviceWidth > 400 ? 17 : 14,
+    textAlign: 'center',
+    paddingTop: 10,
   },
 
   link: {
@@ -170,16 +179,11 @@ const styles = StyleSheet.create({
     fontWeight: 500,
   },
 
-  remember: {
-    fontSize: 17,
-    color: '#989898',
-  },
-
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 5,
+    marginTop: 8,
     marginBottom: 20,
   },
 
@@ -187,7 +191,7 @@ const styles = StyleSheet.create({
     color: appColors.primary500,
     textDecorationColor: appColors.primary500,
     textDecorationStyle: 'solid',
-    fontSize: 17,
+    fontSize: deviceWidth > 400 ? 17 : 14,
     textDecorationLine: 'underline',
   },
 
@@ -202,10 +206,14 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
 
+  button: {
+    marginTop: 8,
+  },
+
   face: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: deviceWidth > 400 ? 50 : 40,
+    height: deviceWidth > 400 ? 50 : 40,
+    borderRadius: deviceWidth > 400 ? 25 : 20,
     backgroundColor: '#CFCFCF33',
     alignItems: 'center',
     justifyContent: 'center',

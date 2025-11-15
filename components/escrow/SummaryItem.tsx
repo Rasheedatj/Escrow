@@ -1,3 +1,4 @@
+import { deviceWidth } from '@/lib/helpers';
 import { SummaryItemProp } from '@/lib/types';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
 
   title: {
     color: '#979797',
-    fontSize: 17,
+    fontSize: deviceWidth > 400 ? 17 : 15,
     flex: 1,
     marginHorizontal: 13,
   },
@@ -43,6 +44,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: '#595959',
     fontWeight: 500,
-    fontSize: 17,
+    fontSize: deviceWidth > 400 ? 15 : 13,
   },
 });

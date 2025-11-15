@@ -1,6 +1,7 @@
 import Button from '@/components/UI/Button';
 import { onboardingData } from '@/data/UI';
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -86,25 +87,25 @@ const styles = StyleSheet.create({
   },
 
   details: {
-    paddingTop: 20,
+    paddingTop: deviceWidth > 400 ? 20 : 16,
   },
 
   title: {
     fontWeight: 600,
-    fontSize: 25.42,
+    fontSize: deviceWidth > 400 ? 25.42 : 18,
     color: appColors.black,
-    lineHeight: 36,
+    lineHeight: deviceWidth > 400 ? 36 : 28,
   },
 
   description: {
-    fontSize: 19.57,
-    paddingTop: 8,
+    fontSize: deviceWidth > 400 ? 19.57 : 15,
+    paddingTop: deviceWidth > 400 ? 8 : 4,
     color: appColors.grayText300,
-    lineHeight: 28,
-    marginBottom: 30,
+    lineHeight: deviceWidth > 400 ? 28 : 22,
+    marginBottom: deviceWidth > 400 ? 30 : 15,
   },
 
   button: {
-    marginBottom: 10,
+    marginBottom: deviceWidth > 400 ? 10 : 0,
   },
 });

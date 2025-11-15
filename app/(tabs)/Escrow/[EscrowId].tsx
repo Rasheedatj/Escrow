@@ -5,7 +5,7 @@ import Button from '@/components/UI/Button';
 import PageTitle from '@/components/UI/PageTitle';
 import { Progress, summaryItems } from '@/data/UI';
 import { appColors } from '@/lib/commonStyles';
-import { formatCurrency } from '@/lib/helpers';
+import { deviceWidth, formatCurrency } from '@/lib/helpers';
 import { Octicons } from '@expo/vector-icons';
 import React from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -86,16 +86,18 @@ const styles = StyleSheet.create({
     paddingTop: 26,
     alignItems: 'center',
   },
+
   amount: {
     color: '#7E7E7ECF',
     fontWeight: 500,
-    fontSize: 16.74,
+    fontSize: deviceWidth > 400 ? 16.74 : 14,
     paddingBottom: 10,
     textAlign: 'center',
   },
+
   amountNumber: {
     color: '#292929',
-    fontSize: 24,
+    fontSize: deviceWidth > 400 ? 24 : 20,
     fontWeight: 600,
   },
 
@@ -114,9 +116,9 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 47,
-    height: 47,
-    borderRadius: 47 / 2,
+    width: deviceWidth > 400 ? 47 : 40,
+    height: deviceWidth > 400 ? 47 : 40,
+    borderRadius: deviceWidth > 400 ? 47 : 40 / 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -132,8 +134,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    paddingBottom: 6,
-    fontSize: 16,
+    paddingBottom: deviceWidth > 400 ? 6 : 4,
+    fontSize: deviceWidth > 400 ? 16 : 14,
     color: '#2E2F31',
     fontWeight: 500,
   },
@@ -141,6 +143,7 @@ const styles = StyleSheet.create({
   description: {
     color: '#2E2F318A',
     fontWeight: 500,
+    fontSize: deviceWidth > 400 ? 14 : 13,
   },
 
   last: {
@@ -149,16 +152,16 @@ const styles = StyleSheet.create({
   },
 
   summaryamount: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontWeight: 500,
-    fontSize: 17.7,
+    fontSize: deviceWidth > 400 ? 17.7 : 14,
     color: '#2E2F31',
     paddingBottom: 3,
   },
 
   time: {
     textAlign: 'left',
-    fontSize: 13,
+    fontSize: deviceWidth > 400 ? 13 : 12,
     color: '#2E2F318A',
     marginRight: 5,
     fontWeight: 500,
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
   },
 
   summaryItems: {
-    marginTop: 5,
+    marginTop: deviceWidth > 400 ? 5 : 0,
     marginBottom: 20,
   },
 
@@ -183,12 +186,12 @@ const styles = StyleSheet.create({
   progressTitle: {
     color: '#292929',
     fontWeight: 500,
-    fontSize: 18,
+    fontSize: deviceWidth > 400 ? 18 : 15,
   },
 
   progressDescription: {
-    fontSize: 16.4,
-    lineHeight: 24,
+    fontSize: deviceWidth > 400 ? 16.4 : 14,
+    lineHeight: deviceWidth > 400 ? 24 : 22,
     fontWeight: 500,
     color: '#292929B8',
     marginTop: 8,

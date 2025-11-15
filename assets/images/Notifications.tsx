@@ -1,9 +1,16 @@
+import { deviceWidth } from '@/lib/helpers';
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 const Notifications = (props: any) => {
   return (
-    <Svg width='27' height='27' viewBox='0 0 27 27' fill='none' {...props}>
+    <Svg
+      width={deviceWidth > 400 ? 27 : 24}
+      height='27'
+      viewBox='0 0 27 27'
+      fill='none'
+      {...props}
+    >
       <Path
         fillRule='evenodd'
         clipRule='evenodd'

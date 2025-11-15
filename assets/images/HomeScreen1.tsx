@@ -1,3 +1,4 @@
+import { deviceWidth } from '@/lib/helpers';
 import Svg, {
   Circle,
   ClipPath,
@@ -12,7 +13,12 @@ import Svg, {
 
 const HomeScreen1 = (props: any) => {
   return (
-    <Svg width='360' height='417' viewBox='0 0 378 417' fill='none'>
+    <Svg
+      width={deviceWidth > 400 ? 360 : 330}
+      height={deviceWidth > 400 ? 417 : 320}
+      viewBox='0 0 378 417'
+      fill='none'
+    >
       <G clipPath='url(#clip0_1_20403)'>
         <Rect width='377.158' height='816' rx='17.6242' fill='white' />
         <Rect

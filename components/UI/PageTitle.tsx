@@ -1,3 +1,4 @@
+import { deviceWidth } from '@/lib/helpers';
 import { PageTitleProp } from '@/lib/types';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -10,7 +11,11 @@ const PageTitle = ({ children, headerRight, hasBackButton }: PageTitleProp) => {
     return (
       <View style={styles.box}>
         <Pressable onPress={() => router.back()}>
-          <Ionicons name='chevron-back' color={'#111827'} size={24} />
+          <Ionicons
+            name='chevron-back'
+            color={'#111827'}
+            size={deviceWidth > 400 ? 24 : 20}
+          />
         </Pressable>
         <Text style={styles.text}>{children}</Text>
       </View>
@@ -35,8 +40,9 @@ const styles = StyleSheet.create({
     borderColor: '#CECECE70',
     paddingBottom: 10,
   },
+
   title: {
-    fontSize: 27,
+    fontSize: deviceWidth > 400 ? 27 : 22,
     color: '#000000C9',
     fontWeight: 600,
   },

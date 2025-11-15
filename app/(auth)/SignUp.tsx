@@ -3,18 +3,18 @@ import PasswordVisibilityToggle from '@/components/PasswordVisibilityToggle';
 import Button from '@/components/UI/Button';
 import Input from '@/components/UI/Input';
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { useCreateUser } from '@/lib/queries';
 import { SignUpFormData, signUpSchema } from '@/lib/schema';
 import { useAuth } from '@/lib/store/authContext';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, useRouter } from 'expo-router';
+import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 const SignUpScreen = () => {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
@@ -70,12 +70,6 @@ const SignUpScreen = () => {
 
       <View>
         <Text style={styles.title}>Create your account</Text>
-        <Text style={styles.description}>
-          Already have an account?{' '}
-          <Link href={'/(auth)/Login'} style={styles.link}>
-            Log in
-          </Link>
-        </Text>
       </View>
 
       <View>
@@ -86,7 +80,7 @@ const SignUpScreen = () => {
             <Input
               label='Full Name'
               placeholder='e.g John Doe'
-              style={{ marginBottom: 24 }}
+              style={styles.input}
               autoCapitalize='words'
               value={value}
               onChangeText={onChange}
@@ -102,7 +96,7 @@ const SignUpScreen = () => {
             <Input
               label='Email'
               placeholder='e.g John@doe.com'
-              style={{ marginBottom: 24 }}
+              style={styles.input}
               keyboardType={'email-address'}
               autoCapitalize='none'
               value={value}
@@ -126,7 +120,7 @@ const SignUpScreen = () => {
                   onPress={() => handleToggle('password')}
                 />
               }
-              style={{ marginBottom: 24 }}
+              style={styles.input}
               value={value}
               onChangeText={onChange}
               errorMessage={errors.password?.message}
@@ -148,7 +142,7 @@ const SignUpScreen = () => {
                   onPress={() => handleToggle('confirmPassword')}
                 />
               }
-              style={{ marginBottom: 24 }}
+              style={styles.input}
               value={value}
               onChangeText={onChange}
               errorMessage={errors.confirmPassword?.message}
@@ -163,6 +157,13 @@ const SignUpScreen = () => {
         >
           {isPending ? 'Creating user...' : ' Create Account'}
         </Button>
+
+        <Text style={styles.description}>
+          Already have an account?{' '}
+          <Link href={'/(auth)/Login'} style={styles.link}>
+            Log in
+          </Link>
+        </Text>
       </View>
     </ScrollView>
   );
@@ -172,21 +173,24 @@ export default SignUpScreen;
 
 const styles = StyleSheet.create({
   root: {
-    marginTop: 30,
+    marginTop: deviceWidth > 400 ? 30 : 0,
+    marginBottom: 10,
   },
 
   title: {
-    fontSize: 32.91,
+    fontSize: deviceWidth > 400 ? 32.91 : 26,
     color: appColors.black,
     fontWeight: 500,
     paddingBottom: 10,
-    marginTop: 45,
+    marginTop: deviceWidth > 400 ? 45 : 30,
+    marginBottom: 20,
   },
 
   description: {
     color: '#A8A8A8',
-    fontSize: 17,
-    marginBottom: 40,
+    fontSize: deviceWidth > 400 ? 17 : 14,
+    paddingTop: 10,
+    textAlign: 'center',
   },
 
   link: {
@@ -194,7 +198,11 @@ const styles = StyleSheet.create({
     fontWeight: 500,
   },
 
+  input: {
+    marginBottom: deviceWidth > 400 ? 24 : 18,
+  },
+
   button: {
-    marginTop: 20,
+    marginTop: deviceWidth > 400 ? 20 : 10,
   },
 });

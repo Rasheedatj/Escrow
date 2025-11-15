@@ -1,4 +1,5 @@
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -9,7 +10,11 @@ const Tag = ({ openBanner }: { openBanner: () => void }) => {
       <Text style={styles.copyText}>Tag32Gb6</Text>
       <Pressable onPress={openBanner} style={styles.copy}>
         <Text style={styles.copyText}>Copy Tag</Text>
-        <Ionicons name='copy-outline' size={24} color={appColors.primary500} />
+        <Ionicons
+          name='copy-outline'
+          size={deviceWidth > 400 ? 24 : 18}
+          color={appColors.primary500}
+        />
       </Pressable>
     </View>
   );
@@ -39,6 +44,6 @@ const styles = StyleSheet.create({
     color: appColors.primary500,
     marginRight: 10,
     fontWeight: 500,
-    fontSize: 16.8,
+    fontSize: deviceWidth > 400 ? 16.8 : 14,
   },
 });

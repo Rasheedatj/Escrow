@@ -1,3 +1,4 @@
+import { deviceWidth } from '@/lib/helpers';
 import { ProgressProp } from '@/lib/types';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
@@ -39,13 +40,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     alignItems: 'flex-end',
-    // backgroundColor: 'red',
-    // marginBottom: 10,
   },
 
   iconBox: {
     alignItems: 'center',
-    // justifyContent: 'flex-end',
   },
 
   line: {
@@ -59,8 +57,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 32,
-    height: 32,
+    width: deviceWidth > 400 ? 32 : 28,
+    height: deviceWidth > 400 ? 32 : 28,
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
@@ -76,16 +74,16 @@ const styles = StyleSheet.create({
   article: {
     marginLeft: 10,
   },
+
   title: {
-    fontSize: 15.71,
+    fontSize: deviceWidth > 400 ? 15.71 : 14,
     fontWeight: 500,
     color: '#292929',
   },
 
   details: {
-    fontSize: 13.34,
+    fontSize: deviceWidth > 400 ? 13.34 : 12,
     color: '#29292978',
     fontWeight: 500,
-    // marginTop: 6,
   },
 });

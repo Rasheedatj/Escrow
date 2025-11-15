@@ -1,4 +1,5 @@
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { ProfileItem } from '@/lib/types';
 import React from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -60,8 +61,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 47,
-    height: 47,
+    width: deviceWidth > 400 ? 47 : 40,
+    height: deviceWidth > 400 ? 47 : 40,
     borderRadius: 47 / 2,
     justifyContent: 'center',
     alignItems: 'center',
@@ -70,8 +71,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    paddingBottom: 7,
-    fontSize: 16,
+    paddingBottom: deviceWidth > 400 ? 7 : 4,
+    fontSize: deviceWidth > 400 ? 16 : 14,
     color: '#2E2F31',
     fontWeight: 500,
   },

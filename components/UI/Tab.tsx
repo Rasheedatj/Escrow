@@ -1,4 +1,5 @@
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { TabProp } from '@/lib/types';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -26,7 +27,7 @@ export default Tab;
 const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: deviceWidth > 400 ? 20 : 15,
     marginBottom: 8,
     justifyContent: 'center',
   },
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 15.21,
+    fontSize: deviceWidth > 400 ? 15.21 : 13,
     fontWeight: 500,
     color: '#29292982',
     textAlign: 'center',

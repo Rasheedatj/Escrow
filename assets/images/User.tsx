@@ -1,9 +1,16 @@
+import { deviceWidth } from '@/lib/helpers';
 import React from 'react';
 import Svg, { Circle, Defs, Image, Pattern, Use } from 'react-native-svg';
 
 const User = (props: any) => {
   return (
-    <Svg width='47' height='47' viewBox='0 0 47 47' fill='none' {...props}>
+    <Svg
+      width={deviceWidth > 400 ? 47 : 40}
+      height={deviceWidth > 400 ? 47 : 40}
+      viewBox='0 0 47 47'
+      fill='none'
+      {...props}
+    >
       <Circle cx='23.5' cy='23.5' r='23.5' fill='url(#pattern0_1_22316)' />
       <Defs>
         <Pattern

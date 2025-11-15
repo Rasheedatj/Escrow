@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { CreateUserProps, LoginProps } from './types';
+const API_KEY = 'AIzaSyBi33yF4IGhgHzzljkiIyALkmQ2QbqyxR0';
 
 export const login = async ({
   email,

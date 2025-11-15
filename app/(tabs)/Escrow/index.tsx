@@ -2,6 +2,7 @@ import TransactionItem from '@/components/transactions/TransactionItem';
 import PageTitle from '@/components/UI/PageTitle';
 import { escrowTransactionData } from '@/data/UI';
 import { appColors, globalStyles } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -68,9 +69,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginTop: 30,
+    marginTop: deviceWidth > 400 ? 30 : 20,
     marginBottom: 10,
-    fontSize: 18.06,
+    fontSize: deviceWidth > 400 ? 18.06 : 17,
     fontWeight: 500,
     color: '#292929',
   },

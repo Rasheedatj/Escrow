@@ -1,4 +1,5 @@
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { TransactionItem as TransactionItemProp } from '@/lib/types';
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
@@ -64,9 +65,9 @@ const styles = StyleSheet.create({
     borderColor: '#D9D9D999',
   },
   icon: {
-    width: 47,
-    height: 47,
-    borderRadius: 47 / 2,
+    width: deviceWidth > 400 ? 47 : 40,
+    height: deviceWidth > 400 ? 47 : 40,
+    borderRadius: (deviceWidth > 400 ? 47 : 40) / 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -82,8 +83,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   title: {
-    paddingBottom: 6,
-    fontSize: 16,
+    paddingBottom: deviceWidth > 400 ? 6 : 4,
+    fontSize: deviceWidth > 400 ? 16 : 14,
     color: '#2E2F31',
     fontWeight: 500,
   },
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
   description: {
     color: '#2E2F318A',
     fontWeight: 500,
+    fontSize: deviceWidth > 400 ? 14 : 12,
   },
 
   last: {
@@ -102,14 +104,14 @@ const styles = StyleSheet.create({
   amount: {
     textAlign: 'left',
     fontWeight: 500,
-    fontSize: 16.8,
+    fontSize: deviceWidth > 400 ? 16.8 : 14,
     color: '#2E2F31',
     paddingBottom: 3,
   },
 
   time: {
     textAlign: 'left',
-    fontSize: 13,
+    fontSize: deviceWidth > 400 ? 13 : 12,
     color: '#2E2F318A',
   },
 });

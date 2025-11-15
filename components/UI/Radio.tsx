@@ -1,4 +1,5 @@
 import { appColors } from '@/lib/commonStyles';
+import { deviceWidth } from '@/lib/helpers';
 import { RadioType } from '@/lib/types';
 import { FontAwesome5 } from '@expo/vector-icons';
 import React from 'react';
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    fontSize: 17,
+    fontSize: deviceWidth > 400 ? 17 : 14,
     color: '#989898',
   },
 });
