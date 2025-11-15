@@ -1,27 +1,30 @@
 import { transactionsTabs } from '@/data/UI';
 import { TabTransactionsProps } from '@/lib/types';
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList, View } from 'react-native';
+import LoadingOverlay from '../UI/LoadingOverlay';
 import Tab from '../UI/Tab';
 import NewTransactionBtn from './NewTransactionBtn';
 import TransactionItem from './TransactionItem';
 
 const TabTransactions = ({
-  escrowData,
-  walletData,
+  data,
+  isLoading,
+  active,
+  setActive,
   showBtn = false,
   isFlatList = true,
 }: TabTransactionsProps) => {
-  const [active, setActive] = useState('escrow');
-
   return (
     <>
       <Tab active={active} setActive={setActive} tabItems={transactionsTabs} />
       {showBtn && active === 'escrow' && <NewTransactionBtn />}
 
-      {isFlatList ? (
+      {isLoading ? (
+        <LoadingOverlay />
+      ) : isFlatList ? (
         <FlatList
-          data={active === 'escrow' ? escrowData : walletData}
+          data={data}
           renderItem={(itemData) => (
             <TransactionItem transaction={itemData.item} />
           )}
@@ -31,7 +34,7 @@ const TabTransactions = ({
         />
       ) : (
         <View style={{ marginBottom: 20 }}>
-          {(active === 'escrow' ? escrowData : walletData).map((item) => {
+          {data.map((item) => {
             return <TransactionItem transaction={item} key={item.id} />;
           })}
         </View>

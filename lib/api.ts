@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { CreateUserProps, LoginProps } from './types';
+import { api } from './axios';
+import {
+  CreateTransactionProp,
+  CreateUserProps,
+  GetTransactions,
+  LoginProps,
+  TransactionItem,
+} from './types';
+const API_KEY = 'AIzaSyBi33yF4IGhgHzzljkiIyALkmQ2QbqyxR0';
 
 export const login = async ({
   email,
@@ -38,6 +46,48 @@ export const createUser = async ({
       }
     );
     return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createTransaction = async ({
+  newTransaction,
+  token,
+  type,
+}: CreateTransactionProp) => {
+  try {
+    return await axios.post(
+      `https://expense-tracker-3e6da-default-rtdb.firebaseio.com/${type}.json?auth=${token}`,
+      newTransaction
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTransactions = async ({ type, token }: GetTransactions) => {
+  try {
+    const res = await api.get(
+      `https://expense-tracker-3e6da-default-rtdb.firebaseio.com/${type}.json?auth=${token}`
+    );
+    const transactions = [];
+
+    for (const key in res.data) {
+      const transactionObj: TransactionItem = {
+        id: key,
+        amount: res.data[key].amount,
+        time: res.data[key].time,
+        description: res.data[key].description,
+        type: res.data[key].type,
+        title: res.data[key].title,
+        userTag: res.data[key].userTag,
+        userAvatar: res.data[key].userAvatar,
+      };
+      transactions.push(transactionObj);
+    }
+
+    return transactions;
   } catch (error) {
     throw error;
   }

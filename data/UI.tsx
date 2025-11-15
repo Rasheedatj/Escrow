@@ -3,14 +3,9 @@ import Bank from '@/assets/images/Bank';
 import Face from '@/assets/images/Face';
 import HomeScreen1 from '@/assets/images/HomeScreen1';
 import HomeScreen2 from '@/assets/images/HomeScreen2';
-import Key from '@/assets/images/Key';
-import Lock from '@/assets/images/Lock';
-import Logout from '@/assets/images/Logout';
-import Support from '@/assets/images/Support';
 import { appColors } from '@/lib/commonStyles';
 import {
   OnboardingItem,
-  ProfileItem,
   ProgressProp,
   SummaryItemProp,
   TabItem,

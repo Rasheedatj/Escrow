@@ -1,5 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
-import { createUser, login } from './api';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { createTransaction, createUser, getTransactions, login } from './api';
+import { GetTransactions } from './types';
 
 export const useLogin = () => {
   const { mutateAsync: loginMutation, isPending } = useMutation({
@@ -17,4 +18,21 @@ export const useCreateUser = () => {
   });
 
   return { createUserMutation, isPending };
+};
+
+export const useAddTransaction = () => {
+  const { mutate: createTransactionMutation, isPending } = useMutation({
+    mutationFn: createTransaction,
+  });
+
+  return { createTransactionMutation, isPending };
+};
+
+export const useGetTransactions = ({ token, type }: GetTransactions) => {
+  const { data: transactions, isLoading } = useQuery({
+    queryKey: [type],
+    queryFn: () => getTransactions({ token, type }),
+  });
+
+  return { transactions, isLoading };
 };

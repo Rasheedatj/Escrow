@@ -1,4 +1,3 @@
-import { escrowTransactionData, walletTransactionData } from '@/data/UI';
 import { appColors } from '@/lib/commonStyles';
 import { deviceWidth } from '@/lib/helpers';
 import { Ionicons } from '@expo/vector-icons';
@@ -6,7 +5,6 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import NewTransactionBtn from '../transactions/NewTransactionBtn';
-import TabTransactions from '../transactions/TabTransactions';
 
 const Transactions = () => {
   const router = useRouter();
@@ -33,11 +31,11 @@ const Transactions = () => {
         </Pressable>
       </View>
 
-      <TabTransactions
+      {/* <TabTransactions
         escrowData={escrowTransactionData.slice(0, 3)}
         walletData={walletTransactionData.slice(0, 3)}
         isFlatList={false}
-      />
+      /> */}
     </View>
   );
 };

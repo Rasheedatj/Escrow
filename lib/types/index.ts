@@ -75,8 +75,10 @@ export interface IconButtonProps {
 }
 
 export interface TabTransactionsProps {
-  escrowData: TransactionItem[];
-  walletData: TransactionItem[];
+  data: TransactionItem[];
+  isLoading: boolean;
+  active: string;
+  setActive: Dispatch<SetStateAction<string>>;
   showBtn?: boolean;
   isFlatList?: boolean;
 }
@@ -116,4 +118,15 @@ export interface CreateUserProps {
   email: string;
   password: string;
   returnSecureToken: boolean;
+}
+
+export interface CreateTransactionProp {
+  newTransaction: TransactionItem;
+  token: string;
+  type: 'escrowTransactions' | 'walletTransactions';
+}
+
+export interface GetTransactions {
+  token: string;
+  type: 'escrowTransactions' | 'walletTransactions';
 }
