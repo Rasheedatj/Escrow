@@ -1,15 +1,27 @@
 import { appColors } from '@/lib/commonStyles';
 import { deviceWidth } from '@/lib/helpers';
+import { useGetTransactions } from '@/lib/queries';
+import { useAuth } from '@/lib/store/authContext';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import NewTransactionBtn from '../transactions/NewTransactionBtn';
+import TabTransactions from '../transactions/TabTransactions';
 
 const Transactions = () => {
   const router = useRouter();
+  const { user } = useAuth();
+  const [active, setActive] = useState('escrow');
+
+  const { transactions, isLoading } = useGetTransactions({
+    type: `${active}Transactions` as
+      | 'escrowTransactions'
+      | 'walletTransactions',
+    token: user?.idToken!,
+  });
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <NewTransactionBtn />
 
       <View style={styles.header}>
@@ -31,11 +43,13 @@ const Transactions = () => {
         </Pressable>
       </View>
 
-      {/* <TabTransactions
-        escrowData={escrowTransactionData.slice(0, 3)}
-        walletData={walletTransactionData.slice(0, 3)}
+      <TabTransactions
+        data={isLoading || !transactions ? [] : transactions?.slice(0, 3)}
+        isLoading={isLoading}
+        active={active}
+        setActive={setActive}
         isFlatList={false}
-      /> */}
+      />
     </View>
   );
 };

@@ -8,3 +8,4 @@ export function formatCurrency(amount: number): string {
 }
 
 export const deviceWidth = Dimensions.get('screen').width;
+export const deviceHeight = Dimensions.get('screen').height;

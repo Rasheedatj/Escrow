@@ -14,7 +14,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Toast from 'react-native-toast-message';
 
 const LoginScreen = () => {
@@ -64,90 +71,104 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.root}>
-      <Logo />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.root}
+    >
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom: 80,
+        }}
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}
+        // keyboardShouldPersistTaps='handled'
+        // keyboardDismissMode='interactive'
+      >
+        <Logo />
 
-      {/* <View> */}
-      <Text style={styles.title}>Log in to your account</Text>
+        <Text style={styles.title}>Log in to your account</Text>
 
-      {/* </View> */}
-
-      <View>
-        <Controller
-          name='email'
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              placeholder='Enter address'
-              value={value}
-              onChangeText={onChange}
-              iconLeft={
-                <Ionicons
-                  name='mail-outline'
-                  size={24}
-                  color={appColors.border}
-                />
-              }
-              mode='transparent'
-              autoCapitalize='none'
-              keyboardType={'email-address'}
-              errorMessage={errors.email?.message}
-            />
-          )}
-        />
-
-        <Controller
-          name='password'
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <View style={styles.password}>
+        <View>
+          <Controller
+            name='email'
+            control={control}
+            render={({ field: { onChange, value } }) => (
               <Input
-                placeholder='Password'
+                placeholder='Enter address'
                 value={value}
                 onChangeText={onChange}
                 iconLeft={
-                  <Feather name='lock' size={24} color={appColors.border} />
-                }
-                iconRight={
-                  <PasswordVisibilityToggle
-                    show={showPassword}
-                    onPress={() => setShowPassword((s) => !s)}
+                  <Ionicons
+                    name='mail-outline'
+                    size={24}
+                    color={appColors.border}
                   />
                 }
-                isPassword={!showPassword}
                 mode='transparent'
-                style={styles.passwordInput}
-                errorMessage={errors.password?.message}
+                autoCapitalize='none'
+                keyboardType={'email-address'}
+                errorMessage={errors.email?.message}
               />
+            )}
+          />
 
-              <View style={styles.face}>
-                <Face color='#2C2828' />
+          <Controller
+            name='password'
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <View style={styles.password}>
+                <Input
+                  placeholder='Password'
+                  value={value}
+                  onChangeText={onChange}
+                  iconLeft={
+                    <Feather name='lock' size={24} color={appColors.border} />
+                  }
+                  iconRight={
+                    <PasswordVisibilityToggle
+                      show={showPassword}
+                      onPress={() => setShowPassword((s) => !s)}
+                    />
+                  }
+                  isPassword={!showPassword}
+                  mode='transparent'
+                  style={styles.passwordInput}
+                  errorMessage={errors.password?.message}
+                />
+
+                <View style={styles.face}>
+                  <Face color='#2C2828' />
+                </View>
               </View>
-            </View>
-          )}
-        />
+            )}
+          />
 
-        <View style={styles.footer}>
-          <Radio label='Remember me' value={remember} setValue={setRemember} />
+          <View style={styles.footer}>
+            <Radio
+              label='Remember me'
+              value={remember}
+              setValue={setRemember}
+            />
 
-          <Text style={styles.forgot}>Forgot password?</Text>
+            <Text style={styles.forgot}>Forgot password?</Text>
+          </View>
+          <Button
+            onPress={handleSubmit(onSubmit)}
+            isLoading={isPending}
+            style={styles.button}
+          >
+            {isPending ? 'Logging In...' : 'Log In'}
+          </Button>
+
+          <Text style={styles.description}>
+            Don&apos;t have an account?{' '}
+            <Link href={'/(auth)/SignUp'} style={styles.link}>
+              Create account
+            </Link>
+          </Text>
         </View>
-        <Button
-          onPress={handleSubmit(onSubmit)}
-          isLoading={isPending}
-          style={styles.button}
-        >
-          {isPending ? 'Logging In...' : 'Log In'}
-        </Button>
-
-        <Text style={styles.description}>
-          Don&apos;t have an account?{' '}
-          <Link href={'/(auth)/SignUp'} style={styles.link}>
-            Create account
-          </Link>
-        </Text>
-      </View>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -156,6 +177,7 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   root: {
     marginTop: 30,
+    flex: 1,
   },
 
   title: {

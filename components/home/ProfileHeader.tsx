@@ -2,11 +2,13 @@ import Notifications from '@/assets/images/Notifications';
 import User from '@/assets/images/User';
 import { globalStyles } from '@/lib/commonStyles';
 import { deviceWidth } from '@/lib/helpers';
+import { useGetUser } from '@/lib/queries';
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const ProfileHeader = () => {
+  const { userProfile, isLoading } = useGetUser();
   return (
     <View style={styles.header}>
       <User />
@@ -14,7 +16,7 @@ const ProfileHeader = () => {
         <Text style={[globalStyles.description, { marginBottom: 0 }]}>
           Hello,
         </Text>
-        <Text style={styles.title}> Olaoluwa Abijo</Text>
+        <Text style={styles.title}> {isLoading ? '' : userProfile.name}</Text>
       </View>
       <View style={styles.icons}>
         <AntDesign

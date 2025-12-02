@@ -25,6 +25,7 @@ export interface ButtonType {
 
 export interface InputType {
   label?: string;
+  rightLabel?: ReactNode;
   isPassword?: boolean;
   iconLeft?: ReactNode;
   iconRight?: any;
@@ -117,7 +118,25 @@ export interface LoginProps {
 export interface CreateUserProps {
   email: string;
   password: string;
+  name: string;
   returnSecureToken: boolean;
+}
+
+export interface GetUserProp {
+  localId: string;
+  token: string;
+}
+
+export interface UserProfileProp {
+  uid: string;
+  token: string;
+  profileData: {
+    name: string;
+    walletBalance: number;
+    escrowBalance: number;
+    email: string;
+    tag: string;
+  };
 }
 
 export interface CreateTransactionProp {

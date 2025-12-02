@@ -4,8 +4,10 @@ import {
   CreateTransactionProp,
   CreateUserProps,
   GetTransactions,
+  GetUserProp,
   LoginProps,
   TransactionItem,
+  UserProfileProp,
 } from './types';
 const API_KEY = 'AIzaSyBi33yF4IGhgHzzljkiIyALkmQ2QbqyxR0';
 
@@ -30,6 +32,21 @@ export const login = async ({
   }
 };
 
+export const createUserProfile = async ({
+  uid,
+  profileData,
+  token,
+}: UserProfileProp) => {
+  try {
+    await axios.put(
+      `https://expense-tracker-3e6da-default-rtdb.firebaseio.com/users/${uid}.json?auth=${token}`,
+      profileData
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const createUser = async ({
   email,
   password,
@@ -45,12 +62,36 @@ export const createUser = async ({
         returnSecureToken,
       }
     );
+
+    await createUserProfile({
+      uid: res.data.localId,
+      token: res.data.idToken,
+      profileData: {
+        walletBalance: 0,
+        escrowBalance: 0,
+        name: 'Tester',
+        email,
+        tag: '32Gb6',
+      },
+    });
+
+    return res.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const getUser = async ({ localId, token }: GetUserProp) => {
+  try {
+    const res = await axios.get(
+      `https://expense-tracker-3e6da-default-rtdb.firebaseio.com/users/${localId}.json?auth=${token}`
+    );
+
     return res.data;
   } catch (error) {
     throw error;
   }
 };
-
 export const createTransaction = async ({
   newTransaction,
   token,

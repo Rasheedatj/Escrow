@@ -13,7 +13,7 @@ const AllSetScreen = () => {
   return (
     <>
       <SafeAreaView
-        edges={[]} // disables all safe area insets
+        edges={[]}
         style={[styles.root, globalStyles.rootContainer]}
       >
         <StatusBar

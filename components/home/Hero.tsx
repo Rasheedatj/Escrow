@@ -1,5 +1,6 @@
 import LockOutline from '@/assets/images/LockOutline';
 import { deviceWidth, formatCurrency } from '@/lib/helpers';
+import { useGetUser } from '@/lib/queries';
 import { AntDesign, Entypo, Feather, Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -8,10 +9,11 @@ import IconButton from '../UI/IconButton';
 
 const Hero = () => {
   const [activeHero, setActiveHero] = useState<'Wallet' | 'Escrow'>('Wallet');
+  const { userProfile, isLoading } = useGetUser();
 
   const balance = {
-    escrow: 18000,
-    wallet: 4000,
+    escrow: isLoading ? 0 : userProfile.escrowBalance,
+    wallet: isLoading ? 0 : userProfile.walletBalance,
   };
 
   return (

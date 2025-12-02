@@ -23,13 +23,17 @@ const Input = ({
   value,
   onChangeText,
   errorMessage,
+  rightLabel,
 }: InputType & TextInputProps) => {
   return (
     <View style={[styles.main, style]}>
       {label && (
-        <Text style={[styles.label, errorMessage && styles.errorLabel]}>
-          {label}
-        </Text>
+        <View style={styles.labelContainer}>
+          <Text style={[styles.label, errorMessage && styles.errorLabel]}>
+            {label}
+          </Text>
+          {rightLabel}
+        </View>
       )}
       <View
         style={[
@@ -92,6 +96,12 @@ const styles = StyleSheet.create({
     color: '#707070A1',
     fontWeight: 500,
     fontSize: deviceWidth > 400 ? 17 : 14,
+  },
+
+  labelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 
   errorLabel: {

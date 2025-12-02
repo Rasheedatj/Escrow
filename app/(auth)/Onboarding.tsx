@@ -1,7 +1,7 @@
 import Button from '@/components/UI/Button';
 import { onboardingData } from '@/data/UI';
 import { appColors } from '@/lib/commonStyles';
-import { deviceWidth } from '@/lib/helpers';
+import { deviceHeight, deviceWidth } from '@/lib/helpers';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -22,36 +22,39 @@ const OnboardingScreen = () => {
   const handleGoToSignUp = () => router.push('/(auth)/SignUp');
 
   const activeItem = onboardingData.find((item) => item.id === active);
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={styles.imageContainer}>{activeItem?.image}</View>
 
-      <View style={styles.scrollContainer}>
-        <View
-          style={[
-            styles.scrollItem,
-            activeItem?.id === 'onb-1' && styles.activeScrollItem,
-          ]}
-        ></View>
-        <View
-          style={[
-            styles.scrollItem,
-            activeItem?.id === 'onb-2' && styles.activeScrollItem,
-          ]}
-        ></View>
-      </View>
+      <View>
+        <View style={styles.scrollContainer}>
+          <View
+            style={[
+              styles.scrollItem,
+              activeItem?.id === 'onb-1' && styles.activeScrollItem,
+            ]}
+          ></View>
+          <View
+            style={[
+              styles.scrollItem,
+              activeItem?.id === 'onb-2' && styles.activeScrollItem,
+            ]}
+          ></View>
+        </View>
 
-      <View style={styles.details}>
-        <Text style={styles.title}>{activeItem?.title}</Text>
-        <Text style={styles.description}>{activeItem?.description}</Text>
+        <View style={styles.details}>
+          <Text style={styles.title}>{activeItem?.title}</Text>
+          <Text style={styles.description}>{activeItem?.description}</Text>
 
-        <View>
-          <Button style={styles.button} mode='flat' onPress={handleGoToLogin}>
-            Login
-          </Button>
-          <Button style={styles.button} onPress={handleGoToSignUp}>
-            Create Account
-          </Button>
+          <View>
+            <Button style={styles.button} mode='flat' onPress={handleGoToLogin}>
+              Login
+            </Button>
+            <Button style={styles.button} onPress={handleGoToSignUp}>
+              Create Account
+            </Button>
+          </View>
         </View>
       </View>
     </View>
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: deviceHeight > 900 ? 60 : 20,
   },
 
   scrollItem: {

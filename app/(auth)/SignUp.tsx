@@ -11,7 +11,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Toast from 'react-native-toast-message';
 
 const SignUpScreen = () => {
@@ -31,12 +38,13 @@ const SignUpScreen = () => {
   });
 
   const onSubmit = async (data: SignUpFormData) => {
-    const { email, password } = data;
+    const { email, password, name } = data;
     await createUserMutation(
-      { email, password, returnSecureToken: true },
+      { email, password, name, returnSecureToken: true },
       {
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
           login(data);
+          // createProfileMutation({ uid: data.idToken, name:'', idToken:data.localId});
           // router.push('/(auth)/AllSet');
         },
         onError: (error: any) => {
@@ -61,111 +69,117 @@ const SignUpScreen = () => {
     });
 
   return (
-    <ScrollView
-      alwaysBounceVertical={false}
-      showsVerticalScrollIndicator={false}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.root}
+      keyboardVerticalOffset={80}
     >
-      <Logo />
+      <ScrollView
+        alwaysBounceVertical={false}
+        showsVerticalScrollIndicator={false}
+        style={styles.root}
+      >
+        <Logo />
 
-      <View>
-        <Text style={styles.title}>Create your account</Text>
-      </View>
+        <View>
+          <Text style={styles.title}>Create your account</Text>
+        </View>
 
-      <View>
-        <Controller
-          name='name'
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              label='Full Name'
-              placeholder='e.g John Doe'
-              style={styles.input}
-              autoCapitalize='words'
-              value={value}
-              onChangeText={onChange}
-              errorMessage={errors.name?.message}
-            />
-          )}
-        />
+        <View>
+          <Controller
+            name='name'
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label='Full Name'
+                placeholder='e.g John Doe'
+                style={styles.input}
+                autoCapitalize='words'
+                value={value}
+                onChangeText={onChange}
+                errorMessage={errors.name?.message}
+              />
+            )}
+          />
 
-        <Controller
-          name='email'
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              label='Email'
-              placeholder='e.g John@doe.com'
-              style={styles.input}
-              keyboardType={'email-address'}
-              autoCapitalize='none'
-              value={value}
-              onChangeText={onChange}
-              errorMessage={errors.email?.message}
-            />
-          )}
-        />
+          <Controller
+            name='email'
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label='Email'
+                placeholder='e.g John@doe.com'
+                style={styles.input}
+                keyboardType={'email-address'}
+                autoCapitalize='none'
+                value={value}
+                onChangeText={onChange}
+                errorMessage={errors.email?.message}
+              />
+            )}
+          />
 
-        <Controller
-          name='password'
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              label='Password'
-              placeholder='*********'
-              isPassword={!showPassword.password}
-              iconRight={
-                <PasswordVisibilityToggle
-                  show={showPassword.password}
-                  onPress={() => handleToggle('password')}
-                />
-              }
-              style={styles.input}
-              value={value}
-              onChangeText={onChange}
-              errorMessage={errors.password?.message}
-            />
-          )}
-        />
+          <Controller
+            name='password'
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label='Password'
+                placeholder='*********'
+                isPassword={!showPassword.password}
+                iconRight={
+                  <PasswordVisibilityToggle
+                    show={showPassword.password}
+                    onPress={() => handleToggle('password')}
+                  />
+                }
+                style={styles.input}
+                value={value}
+                onChangeText={onChange}
+                errorMessage={errors.password?.message}
+              />
+            )}
+          />
 
-        <Controller
-          name='confirmPassword'
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              label='Confirm Password'
-              placeholder='*********'
-              isPassword={!showPassword.confirmPassword}
-              iconRight={
-                <PasswordVisibilityToggle
-                  show={showPassword.confirmPassword}
-                  onPress={() => handleToggle('confirmPassword')}
-                />
-              }
-              style={styles.input}
-              value={value}
-              onChangeText={onChange}
-              errorMessage={errors.confirmPassword?.message}
-            />
-          )}
-        />
+          <Controller
+            name='confirmPassword'
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label='Confirm Password'
+                placeholder='*********'
+                isPassword={!showPassword.confirmPassword}
+                iconRight={
+                  <PasswordVisibilityToggle
+                    show={showPassword.confirmPassword}
+                    onPress={() => handleToggle('confirmPassword')}
+                  />
+                }
+                style={styles.input}
+                value={value}
+                onChangeText={onChange}
+                errorMessage={errors.confirmPassword?.message}
+              />
+            )}
+          />
 
-        <Button
-          style={styles.button}
-          onPress={handleSubmit(onSubmit)}
-          isLoading={isPending}
-        >
-          {isPending ? 'Creating user...' : ' Create Account'}
-        </Button>
+          <Button
+            style={styles.button}
+            onPress={handleSubmit(onSubmit)}
+            isLoading={isPending}
+          >
+            {isPending ? 'Creating user...' : ' Create Account'}
+          </Button>
 
-        <Text style={styles.description}>
-          Already have an account?{' '}
-          <Link href={'/(auth)/Login'} style={styles.link}>
-            Log in
-          </Link>
-        </Text>
-      </View>
-    </ScrollView>
+          <Text style={styles.description}>
+            Already have an account?{' '}
+            <Link href={'/(auth)/Login'} style={styles.link}>
+              Log in
+            </Link>
+          </Text>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -175,6 +189,7 @@ const styles = StyleSheet.create({
   root: {
     marginTop: deviceWidth > 400 ? 30 : 0,
     marginBottom: 10,
+    flex: 1,
   },
 
   title: {
