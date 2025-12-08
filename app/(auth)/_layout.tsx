@@ -7,13 +7,16 @@ const AuthLayout = () => {
     <Stack
       screenOptions={{
         headerShown: false,
+        presentation: 'card',
+        animation: 'ios_from_left',
+        sheetCornerRadius: 0,
         contentStyle: {
           backgroundColor: appColors.white,
           padding: 16,
         },
       }}
     >
-      <Stack.Screen name='Login' />
+      <Stack.Screen name='Login' options={{ sheetCornerRadius: 0 }} />
       <Stack.Screen name='SignUp' />
       <Stack.Screen name='Verify' />
       <Stack.Screen name='Onboarding' />

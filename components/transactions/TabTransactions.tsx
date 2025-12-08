@@ -19,24 +19,20 @@ const TabTransactions = ({
     <>
       <Tab active={active} setActive={setActive} tabItems={transactionsTabs} />
       {showBtn && active === 'escrow' && <NewTransactionBtn />}
-
       {isLoading ? (
         <LoadingOverlay />
-      ) : isFlatList ? (
-        <FlatList
-          data={data}
-          renderItem={(itemData) => (
-            <TransactionItem transaction={itemData.item} />
-          )}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ marginBottom: 25 }}
-        />
       ) : (
-        <View style={{ marginBottom: 20 }}>
-          {data.map((item) => {
-            return <TransactionItem transaction={item} key={item.id} />;
-          })}
+        <View style={{ marginTop: 10 }}>
+          <FlatList
+            data={data}
+            renderItem={(itemData) => (
+              <TransactionItem transaction={itemData.item} />
+            )}
+            scrollEnabled={isFlatList}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingTop: 10 }}
+          />
         </View>
       )}
     </>

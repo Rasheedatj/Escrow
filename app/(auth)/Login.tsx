@@ -41,8 +41,9 @@ const LoginScreen = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     const { email, password } = data;
-    // email jane@doe.com | john@doe.com | john@doe2.com
+    // email jane@doe.com | john@doe.com | john@doe2.com |olu@joy.com
     // password: Password21
+    // password: Password
     await loginMutation(
       { email, password, returnSecureToken: true },
       {
@@ -81,8 +82,6 @@ const LoginScreen = () => {
         }}
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={false}
-        // keyboardShouldPersistTaps='handled'
-        // keyboardDismissMode='interactive'
       >
         <Logo />
 
@@ -178,6 +177,7 @@ const styles = StyleSheet.create({
   root: {
     marginTop: 30,
     flex: 1,
+    backgroundColor: appColors.white,
   },
 
   title: {

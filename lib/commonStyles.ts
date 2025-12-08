@@ -25,6 +25,7 @@ export const appColors = {
 export const globalStyles = StyleSheet.create({
   rootContainer: {
     padding: 16,
+    paddingBottom: 0,
     flex: 1,
   },
 

@@ -187,7 +187,7 @@ export default SignUpScreen;
 
 const styles = StyleSheet.create({
   root: {
-    marginTop: deviceWidth > 400 ? 30 : 0,
+    marginTop: deviceWidth > 400 ? 16 : 0,
     marginBottom: 10,
     flex: 1,
   },

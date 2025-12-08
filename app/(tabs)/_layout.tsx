@@ -20,7 +20,13 @@ const TabLayout = () => {
           tabBarInactiveTintColor: appColors.grayText500,
           tabBarActiveTintColor: appColors.primary600,
           tabBarStyle: {
-            paddingTop: 10,
+            paddingTop: 15,
+            height: 80,
+          },
+          tabBarLabelStyle: {
+            fontWeight: 500,
+            fontSize: 12,
+            paddingTop: 3,
           },
           sceneStyle: {
             backgroundColor: 'white',

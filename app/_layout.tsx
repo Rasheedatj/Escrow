@@ -1,3 +1,4 @@
+import { appColors } from '@/lib/commonStyles';
 import { queryClient, toastConfig } from '@/lib/config';
 import AuthProvider, { useAuth } from '@/lib/store/authContext';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -45,7 +46,10 @@ export default function RootLayout() {
   const Container = currentScreen === 'AllSet' ? View : SafeAreaView;
 
   return (
-    <Container style={{ flex: 1, backgroundColor: 'white' }} edges={['top']}>
+    <Container
+      style={{ flex: 1, backgroundColor: appColors.white }}
+      edges={['top', 'bottom']}
+    >
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <AuthRedirectController />

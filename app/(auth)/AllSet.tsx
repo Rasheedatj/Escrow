@@ -12,10 +12,7 @@ const AllSetScreen = () => {
   const handleNavigate = () => router.push('/(auth)/Verify');
   return (
     <>
-      <SafeAreaView
-        edges={[]}
-        style={[styles.root, globalStyles.rootContainer]}
-      >
+      <SafeAreaView style={[styles.root, globalStyles.rootContainer]}>
         <StatusBar
           barStyle={'light-content'}
           backgroundColor={appColors.primary500}

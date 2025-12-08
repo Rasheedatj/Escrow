@@ -7,10 +7,11 @@
     "icon": "./assets/images/icon.png",
     "scheme": "escrow",
     "userInterfaceStyle": "automatic",
-    "backgroundColor": "white",
+    "backgroundColor": "#fff",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "backgroundColor": "#fff"
     },
     "android": {
       "adaptiveIcon": {
